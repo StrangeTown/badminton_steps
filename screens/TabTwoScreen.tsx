@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 import { Button, SafeAreaView, StyleSheet } from 'react-native'
+import CourtCountdown from '../components/CourtCountdown'
 import CourtPoints, { pointPoisitions } from '../components/CourtPoints'
+import CourtTip from '../components/CourtTip'
 
 import EditScreenInfo from '../components/EditScreenInfo'
 import { Text, View } from '../components/Themed'
@@ -9,21 +11,54 @@ import { RootTabScreenProps } from '../types'
 export default function TabTwoScreen({
   navigation,
 }: RootTabScreenProps<'TabOne'>) {
-  const [activePointPosition, setActivePointPosition] = useState('0-2')
+  const [activePointPosition, setActivePointPosition] = useState('')
+  const [tipVisible, setTipVisible] = useState(true)
+  const [countdownVisible, setCountdownVisible] = useState(false)
+
   const setRandomPosition = () => {
-    const position = pointPoisitions[Math.round(Math.random() * (pointPoisitions.length - 1))]
+    const position =
+      pointPoisitions[Math.round(Math.random() * (pointPoisitions.length - 1))]
     setActivePointPosition(position)
   }
-  useEffect(() => {
-    const interval = setInterval(() => {
+  let positionInterval: any = null
+  const start = () => {
+    setRandomPosition()
+    positionInterval = setInterval(() => {
       setRandomPosition()
     }, 3000)
-    return () => clearInterval(interval)
+  }
+
+  useEffect(() => {
+    return () => {
+      positionInterval && clearInterval(positionInterval)
+    }
   }, [])
+
+  const handleStartClick = () => {
+    setTipVisible(false)
+    setCountdownVisible(true)
+  }
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.container}>
+      {tipVisible && (
+        <CourtTip
+          onStartClick={() => {
+            handleStartClick()
+          }}
+        />
+      )}
+      <View style={styles.main}>
+        {countdownVisible && (
+          <CourtCountdown
+            initialNum={5}
+            onFinish={() => {
+              setCountdownVisible(false)
+              start()
+            }}
+          />
+        )}
+
         <View style={styles.back}>
           <Button
             title="back"
@@ -36,7 +71,7 @@ export default function TabTwoScreen({
         <View style={styles.court}>
           <View style={styles.centerLine}></View>
         </View>
-        <CourtPoints activePoint={activePointPosition}/>
+        <CourtPoints activePoint={activePointPosition} />
       </View>
     </SafeAreaView>
   )
@@ -46,12 +81,16 @@ const styles = StyleSheet.create({
   container: {
     // flex: 1,
     // width: '100%',
-    height: '100%',
     backgroundColor: '#36BF8E',
+  },
+  main: {
+    height: '100%',
     position: 'relative',
+    backgroundColor: 'transparent',
   },
   back: {
-    zIndex: 10,
+    position: 'absolute',
+    zIndex: 110,
     backgroundColor: 'transparent',
   },
   shortServiceLine: {

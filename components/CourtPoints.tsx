@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { Image, StyleSheet, Text, View } from 'react-native'
 
 export const pointPoisitions = [
   '0-0',
@@ -15,6 +15,31 @@ interface Props {
   activePoint: string
 }
 
+function Direction() {
+  const randomnum = Math.round(Math.random() * 3)
+  const degree = 90 * randomnum
+
+  return (
+    <View
+      style={[
+        styles.direction,
+        {
+          transform: [
+            {
+              rotateZ: `${degree}deg`,
+            },
+          ],
+        },
+      ]}
+    >
+      <Image
+        style={[styles.pointer]}
+        source={require('../assets/images/direction_red.png')}
+      />
+    </View>
+  )
+}
+
 export default function CourtPoints({ activePoint }: Props) {
   return (
     <View style={styles.points}>
@@ -23,18 +48,24 @@ export default function CourtPoints({ activePoint }: Props) {
           <View style={styles.row} key={val}>
             {[1, 2, 3].map((val, pointidx) => {
               const position = `${rowidx}-${pointidx}`
+              if (position === '1-1') return <View></View>
+
               const isActive = position === activePoint
-              const pointStyle = isActive
-                ? {
-                    ...styles.point,
-                    ...styles.pointActive,
-                  }
-                : styles.point
+
               return (
                 <View
                   key={position}
-                  style={position === '1-1' ? {} : pointStyle}
-                ></View>
+                  style={
+                    isActive
+                      ? {
+                          ...styles.point,
+                          ...styles.pointActive,
+                        }
+                      : styles.point
+                  }
+                >
+                  {isActive && <Direction />}
+                </View>
               )
             })}
           </View>
@@ -61,16 +92,31 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   point: {
-    width: 100,
-    height: 100,
+    width: 110,
+    height: 110,
     borderRadius: 300,
     backgroundColor: 'transparent',
     borderWidth: 1,
     borderColor: '#ddd',
     borderStyle: 'dashed',
+    position: 'relative',
   },
   pointActive: {
     backgroundColor: '#fff',
     borderColor: 'transparent',
+  },
+  direction: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+  },
+  pointer: {
+    position: 'absolute',
+    left: '50%',
+    top: '50%',
+    width: '54%',
+    height: '54%',
   },
 })
