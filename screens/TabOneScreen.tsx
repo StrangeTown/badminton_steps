@@ -1,3 +1,4 @@
+import Slider from '@react-native-community/slider';
 import { Button, StyleSheet } from 'react-native';
 
 import EditScreenInfo from '../components/EditScreenInfo';
@@ -7,6 +8,13 @@ import { RootTabScreenProps } from '../types';
 export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'>) {
   return (
     <View style={styles.container}>
+      <Slider
+        style={{width: 200, height: 40}}
+        minimumValue={0}
+        maximumValue={1}
+        minimumTrackTintColor="#FFFFFF"
+        maximumTrackTintColor="#000000"
+      />
       <Button title='next' onPress={() => {
         navigation.navigate('Practice')
       }}></Button>
