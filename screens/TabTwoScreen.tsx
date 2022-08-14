@@ -11,33 +11,50 @@ import { RootTabScreenProps } from '../types'
 export default function TabTwoScreen({
   navigation,
 }: RootTabScreenProps<'TabOne'>) {
+  const sets = 3
+  const rest = 10
+  const shots = 6
+  const speed = 2000
+
   const [activePointPosition, setActivePointPosition] = useState('')
   const [tipVisible, setTipVisible] = useState(true)
   const [countdownVisible, setCountdownVisible] = useState(false)
+  const [currentSet, setCurrentSet] = useState(1)
+  const [currentShot, setCurrentShot] = useState(shots)
 
+  let positionInterval: any = null
+  
   const setRandomPosition = () => {
     const position =
-      pointPoisitions[Math.round(Math.random() * (pointPoisitions.length - 1))]
+    pointPoisitions[Math.round(Math.random() * (pointPoisitions.length - 1))]
     setActivePointPosition(position)
   }
-  let positionInterval: any = null
-  const start = () => {
-    setRandomPosition()
-    positionInterval = setInterval(() => {
-      setRandomPosition()
-    }, 3000)
+  const tick = () => {
+    setCurrentShot(shot => {
+      console.log('shot', shot)
+      if (shot > 0) {
+        setRandomPosition()
+        return shot - 1
+      } else {
+        clearInterval(positionInterval)
+        return shot
+      }
+    })
   }
 
+  const start = () => {
+    positionInterval = setInterval(tick, speed)
+  }
   useEffect(() => {
-    return () => {
-      positionInterval && clearInterval(positionInterval)
-    }
+    return () => positionInterval && clearInterval(positionInterval)
   }, [])
 
   const handleStartClick = () => {
     setTipVisible(false)
     setCountdownVisible(true)
   }
+
+  const phaseString = `第${currentSet}组`
 
   return (
     <SafeAreaView style={styles.container}>
@@ -56,6 +73,7 @@ export default function TabTwoScreen({
               setCountdownVisible(false)
               start()
             }}
+            phase={phaseString}
           />
         )}
 
@@ -66,6 +84,7 @@ export default function TabTwoScreen({
               navigation.navigate('Root')
             }}
           ></Button>
+          <Text>{currentShot}</Text>
         </View>
         <View style={styles.shortServiceLine}></View>
         <View style={styles.court}>

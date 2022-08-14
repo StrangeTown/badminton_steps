@@ -49,7 +49,7 @@ export default function CourtPoints({ activePoint }: Props) {
           <View style={styles.row} key={val}>
             {[1, 2, 3].map((val, pointidx) => {
               const position = `${rowidx}-${pointidx}`
-              if (position === '1-1') return <View></View>
+              if (position === '1-1') return <View key={'1-1'}></View>
 
               const isActive = position === activePoint
 
