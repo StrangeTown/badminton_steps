@@ -32,10 +32,11 @@ function Direction() {
         },
       ]}
     >
-      <Image
+      {/* <Image
         style={[styles.pointer]}
         source={require('../assets/images/direction_red.png')}
-      />
+      /> */}
+      <View style={styles.pointer}></View>
     </View>
   )
 }
@@ -111,6 +112,8 @@ const styles = StyleSheet.create({
     left: 0,
     width: '100%',
     height: '100%',
+    overflow: 'hidden',
+    borderRadius: 100
   },
   pointer: {
     position: 'absolute',
@@ -118,5 +121,6 @@ const styles = StyleSheet.create({
     top: '50%',
     width: '54%',
     height: '54%',
+    backgroundColor: 'red'
   },
 })

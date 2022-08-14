@@ -1,18 +1,17 @@
-import { StatusBar } from 'expo-status-bar';
-import { Platform, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
+import ConfigSlider from '../components/ConfigSlider';
 
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
+import Colors from '../constants/Colors';
 
 export default function ModalScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Modal</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="/screens/ModalScreen.tsx" />
-
-      {/* Use a light status bar on iOS to account for the black space above the modal */}
-      <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'} />
+      <ConfigSlider title='组数：' min={1} max={7}/>
+      <ConfigSlider title='每组间隔（秒）：' min={5} max={20}/>
+      <ConfigSlider title='每组击打次数：' min={8} max={32}/>
+      <ConfigSlider title='击打间隔（秒）：' min={2} max={10}/>
     </View>
   );
 }

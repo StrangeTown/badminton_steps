@@ -52,6 +52,7 @@ const styles = StyleSheet.create({
       width: 6,
       height: 6
     },
-    textShadowRadius: 6
+    textShadowRadius: 6,
+    color: '#555'
   }
 })
