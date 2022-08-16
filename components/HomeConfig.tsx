@@ -1,16 +1,16 @@
 import { useNavigation } from "@react-navigation/native"
 import { StyleSheet } from "react-native"
 import Colors from "../constants/Colors"
+import { useAppSelector } from "../hooks/reduxHooks"
+import { selectRest, selectSets, selectShots, selectSpeed } from "../screens/configSlice"
 import { Text, View } from "./Themed"
 
-interface Props {
-  sets: number,
-  rest: number,
-  shots: number,
-  speed: number
-}
+export default function HomeConfig() {
+  const sets = useAppSelector(selectSets)
+  const rest = useAppSelector(selectRest)
+  const shots = useAppSelector(selectShots)
+  const speed = useAppSelector(selectSpeed)
 
-export default function HomeConfig({sets, rest, shots, speed}: Props) {
   const navigation = useNavigation()
 
   return (

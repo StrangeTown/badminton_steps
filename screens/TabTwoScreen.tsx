@@ -7,18 +7,22 @@ import CourtTip from '../components/CourtTip'
 
 import EditScreenInfo from '../components/EditScreenInfo'
 import { Text, View } from '../components/Themed'
+import { useAppSelector } from '../hooks/reduxHooks'
 import { RootTabScreenProps } from '../types'
+import { selectRest, selectSets, selectShots, selectSpeed } from './configSlice'
 
-const sets = 3
-const rest = 10
-const shots = 6
-const speed = 2000
+
 
 let positionInterval: any = null
 
 export default function TabTwoScreen({
   navigation,
 }: RootTabScreenProps<'TabOne'>) {
+  const sets = useAppSelector(selectSets)
+  const rest = useAppSelector(selectRest)
+  const shots = useAppSelector(selectShots)
+  const speed = useAppSelector(selectSpeed)
+
   const [activePoint, setActivePoint] = useState({
     position: '',
     directionDegree: 0,
@@ -50,7 +54,7 @@ export default function TabTwoScreen({
     positionInterval = setInterval(() => {
       setRandomPosition()
       setCurrentShot((shot) => Math.max(shot - 1, 0))
-    }, speed)
+    }, speed * 1000)
   }
 
   const startRest = () => {

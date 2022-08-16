@@ -7,11 +7,12 @@ import { Text, View } from "./Themed"
 interface Props {
   title: string,
   max: number,
-  min: number
+  min: number,
+  value: number,
+  onChange?: (val: number) => void
 }
 
-export default function ConfigSlider({ title, max, min }: Props) {
-  const [value, setValue] =useState(0)
+export default function ConfigSlider({ title, max, min, value, onChange }: Props) {
 
   return (
     <View style={styles.container}>
@@ -20,13 +21,14 @@ export default function ConfigSlider({ title, max, min }: Props) {
           <Text style={styles.value}>{value}</Text>
         </Text>
         <Slider
+          value={value}
           step={1}
           style={{ width: 200, height: 40 }}
           minimumValue={min}
           maximumValue={max}
           minimumTrackTintColor={Colors.light.court}
           maximumTrackTintColor="#ddd"
-          onValueChange={(val) => setValue(val)}
+          onValueChange={onChange}
           thumbImage={require('../assets/images/Group_2_3_2.png')}
         />
       </View>

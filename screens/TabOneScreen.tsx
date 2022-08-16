@@ -4,14 +4,17 @@ import { Button, StyleSheet } from "react-native"
 import EditScreenInfo from "../components/EditScreenInfo"
 import HomeConfig from "../components/HomeConfig"
 import { Text, View } from "../components/Themed"
+import { useAppSelector } from "../hooks/reduxHooks"
 import { RootTabScreenProps } from "../types"
+import { selectSets } from "./configSlice"
 
 export default function TabOneScreen({
   navigation,
 }: RootTabScreenProps<"TabOne">) {
+
   return (
     <View style={styles.container}>
-      <HomeConfig sets={3} rest={10} shots={12} speed={3}/>
+      <HomeConfig/>
 
       <View style={styles.startWrap}>
         <Button

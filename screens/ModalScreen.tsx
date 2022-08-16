@@ -1,19 +1,68 @@
-import { StyleSheet } from 'react-native';
-import ConfigSlider from '../components/ConfigSlider';
+import { StyleSheet } from 'react-native'
+import ConfigSlider from '../components/ConfigSlider'
 
-import EditScreenInfo from '../components/EditScreenInfo';
-import { Text, View } from '../components/Themed';
-import Colors from '../constants/Colors';
+import EditScreenInfo from '../components/EditScreenInfo'
+import { Text, View } from '../components/Themed'
+import Colors from '../constants/Colors'
+import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks'
+import {
+  selectRest,
+  selectSets,
+  selectShots,
+  selectSpeed,
+  updateRest,
+  updateSets,
+  updateShots,
+  updateSpeed,
+} from './configSlice'
 
 export default function ModalScreen() {
+  const sets = useAppSelector(selectSets)
+  const rest = useAppSelector(selectRest)
+  const shots = useAppSelector(selectShots)
+  const speed = useAppSelector(selectSpeed)
+  const dispatch = useAppDispatch()
+
   return (
     <View style={styles.container}>
-      <ConfigSlider title='组数：' min={1} max={7}/>
-      <ConfigSlider title='每组间隔（秒）：' min={5} max={20}/>
-      <ConfigSlider title='每组击打次数：' min={8} max={32}/>
-      <ConfigSlider title='击打间隔（秒）：' min={2} max={10}/>
+      <ConfigSlider
+        title="组数："
+        min={1}
+        max={7}
+        value={sets}
+        onChange={(val) => {
+          dispatch(updateSets(val))
+        }}
+      />
+      <ConfigSlider
+        title="每组间隔（秒）："
+        min={5}
+        max={20}
+        value={rest}
+        onChange={(val) => {
+          dispatch(updateRest(val))
+        }}
+      />
+      <ConfigSlider
+        title="每组击打次数："
+        min={8}
+        max={32}
+        value={shots}
+        onChange={(val) => {
+          dispatch(updateShots(val))
+        }}
+      />
+      <ConfigSlider
+        title="击打间隔（秒）："
+        min={2}
+        max={10}
+        value={speed}
+        onChange={(val) => {
+          dispatch(updateSpeed(val))
+        }}
+      />
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -31,4 +80,4 @@ const styles = StyleSheet.create({
     height: 1,
     width: '80%',
   },
-});
+})

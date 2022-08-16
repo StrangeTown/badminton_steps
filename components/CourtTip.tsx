@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native'
 import { Button, StyleSheet, Text, View } from 'react-native'
 
 interface Props {
@@ -5,6 +6,8 @@ interface Props {
 }
 
 export default function CourtTip({ onStartClick }: Props) {
+  const navigation = useNavigation()
+
   return (
     <View style={styles.container}>
       <View style={styles.main}>
@@ -30,6 +33,12 @@ export default function CourtTip({ onStartClick }: Props) {
             title="开始吧"
             onPress={() => {
               onStartClick()
+            }}
+          ></Button>
+          <Button
+            title="返回"
+            onPress={() => {
+              navigation.goBack()
             }}
           ></Button>
         </View>
