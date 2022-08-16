@@ -12,13 +12,16 @@ export const pointPoisitions = [
 ]
 
 interface Props {
-  activePoint: string
+  activePoint: {
+    position: string
+    directionDegree: number
+  }
 }
 
-function Direction() {
-  const randomnum = Math.round(Math.random() * 3)
-  const degree = 90 * randomnum
-
+interface directionProps {
+  degree: number
+}
+function Direction({ degree }: directionProps) {
   return (
     <View
       style={[
@@ -32,10 +35,6 @@ function Direction() {
         },
       ]}
     >
-      {/* <Image
-        style={[styles.pointer]}
-        source={require('../assets/images/direction_red.png')}
-      /> */}
       <View style={styles.pointer}></View>
     </View>
   )
@@ -51,7 +50,7 @@ export default function CourtPoints({ activePoint }: Props) {
               const position = `${rowidx}-${pointidx}`
               if (position === '1-1') return <View key={'1-1'}></View>
 
-              const isActive = position === activePoint
+              const isActive = position === activePoint.position
 
               return (
                 <View
@@ -65,7 +64,9 @@ export default function CourtPoints({ activePoint }: Props) {
                       : styles.point
                   }
                 >
-                  {isActive && <Direction />}
+                  {isActive && (
+                    <Direction degree={activePoint.directionDegree} />
+                  )}
                 </View>
               )
             })}
@@ -113,7 +114,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     overflow: 'hidden',
-    borderRadius: 100
+    borderRadius: 100,
   },
   pointer: {
     position: 'absolute',
@@ -121,6 +122,6 @@ const styles = StyleSheet.create({
     top: '50%',
     width: '54%',
     height: '54%',
-    backgroundColor: 'red'
+    backgroundColor: 'red',
   },
 })

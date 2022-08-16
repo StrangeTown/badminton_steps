@@ -8,8 +8,22 @@ export default function CourtTip({ onStartClick }: Props) {
   return (
     <View style={styles.container}>
       <View style={styles.main}>
-        <View>
-          <Text>Some tips.</Text>
+        <View style={styles.legend}>
+          <View style={styles.point}>
+            <View style={styles.direction}></View>
+          </View>
+          <View style={styles.tip}>
+            <View style={styles.white}></View>
+            <Text>
+              白色区域表示<Text style={styles.tipVal}>击球位置</Text>
+            </Text>
+          </View>
+          <View style={styles.tip}>
+            <View style={styles.red}></View>
+            <Text>
+              红色区域表示<Text style={styles.tipVal}>击打方向</Text>
+            </Text>
+          </View>
         </View>
         <View>
           <Button
@@ -35,7 +49,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.1)'
+    backgroundColor: 'rgba(0, 0, 0, 0.1)',
   },
   main: {
     backgroundColor: '#fff',
@@ -52,6 +66,55 @@ const styles = StyleSheet.create({
       width: 3,
     },
     shadowOpacity: 1,
-    shadowRadius: 10
+    shadowRadius: 10,
+  },
+  legend: {
+    position: 'relative',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  point: {
+    width: 100,
+    height: 100,
+    borderRadius: 200,
+    backgroundColor: '#fff',
+    borderColor: '#ddd',
+    borderWidth: 1,
+    position: 'relative',
+    overflow: 'hidden',
+  },
+  direction: {
+    position: 'absolute',
+    backgroundColor: 'red',
+    width: 100,
+    height: 100,
+    left: '50%',
+    top: '50%',
+  },
+  tip: {
+    marginTop: 30,
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  tipVal: {
+    fontWeight: 'bold',
+  },
+  white: {
+    width: 30,
+    height: 20,
+    backgroundColor: '#fff',
+    borderWidth: 1,
+    borderColor: '#ccc',
+    marginRight: 10,
+  },
+  red: {
+    width: 30,
+    height: 20,
+    backgroundColor: 'red',
+    // borderWidth: 1,
+    borderColor: '#aaa',
+    marginRight: 10,
   },
 })
