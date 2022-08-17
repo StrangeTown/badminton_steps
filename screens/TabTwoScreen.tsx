@@ -7,6 +7,7 @@ import CourtTip from '../components/CourtTip'
 
 import EditScreenInfo from '../components/EditScreenInfo'
 import { Text, View } from '../components/Themed'
+import Colors from '../constants/Colors'
 import { useAppSelector } from '../hooks/reduxHooks'
 import { RootTabScreenProps } from '../types'
 import { selectRest, selectSets, selectShots, selectSpeed } from './configSlice'
@@ -57,7 +58,14 @@ export default function TabTwoScreen({
     }, speed * 1000)
   }
 
+  const clearPosition = () => {
+    setActivePoint({
+      position: '',
+      directionDegree: 0,
+    })
+  }
   const startRest = () => {
+    clearPosition()
     setCountdownNum(rest)
   }
 
@@ -67,6 +75,7 @@ export default function TabTwoScreen({
       const sets = Math.max(leftSets - 1, 0)
       setLeftSets(sets)
       if (sets === 0) {
+        clearPosition()
         setFinishedModalVisible(true)
       } else {
         startRest()
@@ -118,7 +127,7 @@ export default function TabTwoScreen({
           />
         )}
 
-        <View style={styles.back}>
+        <View style={styles.debug}>
           <Button
             title="back"
             onPress={() => {
@@ -143,17 +152,18 @@ const styles = StyleSheet.create({
   container: {
     // flex: 1,
     // width: '100%',
-    backgroundColor: '#36BF8E',
+    backgroundColor: Colors.light.court,
   },
   main: {
     height: '100%',
     position: 'relative',
     backgroundColor: 'transparent',
   },
-  back: {
+  debug: {
     position: 'absolute',
     zIndex: 110,
     backgroundColor: 'transparent',
+    // display: 'none',
   },
   shortServiceLine: {
     marginTop: '30%',

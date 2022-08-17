@@ -1,35 +1,30 @@
-import AsyncStorage from "@react-native-async-storage/async-storage"
-import Slider from "@react-native-community/slider"
-import { Button, StyleSheet } from "react-native"
+import { Pressable, StyleSheet } from 'react-native'
 
-import EditScreenInfo from "../components/EditScreenInfo"
-import HomeConfig from "../components/HomeConfig"
-import { Text, View } from "../components/Themed"
-import { useAppSelector } from "../hooks/reduxHooks"
-import persist from "../utils/persist"
-import { RootTabScreenProps } from "../types"
-import { selectSets } from "./configSlice"
+import HomeConfig from '../components/HomeConfig'
+import { Text, View } from '../components/Themed'
+import persist from '../utils/persist'
+import { RootTabScreenProps } from '../types'
+import Colors from '../constants/Colors'
+import AppButton from '../components/base/AppButton'
 
 export default function TabOneScreen({
   navigation,
-}: RootTabScreenProps<"TabOne">) {
-
+}: RootTabScreenProps<'TabOne'>) {
   const gotoPlay = () => {
-    console.log(222)
     persist.saveConfig()
-    navigation.navigate("Practice")
+    navigation.navigate('Practice')
   }
 
   return (
     <View style={styles.container}>
-      <HomeConfig/>
+      <HomeConfig />
 
       <View style={styles.startWrap}>
-        <Button
-          title="进入步法练习"
+        <AppButton
           onPress={() => {
             gotoPlay()
           }}
+          title={'进入步法训练'}
         />
       </View>
     </View>
@@ -39,18 +34,18 @@ export default function TabOneScreen({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#fff",
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#fff',
   },
   title: {
     fontSize: 20,
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
   separator: {
     marginVertical: 30,
     height: 1,
-    width: "80%",
+    width: '80%',
   },
   startWrap: {
     marginTop: 140,

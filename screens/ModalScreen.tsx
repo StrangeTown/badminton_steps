@@ -37,7 +37,7 @@ export default function ModalScreen() {
       <ConfigSlider
         title="每组间隔（秒）："
         min={5}
-        max={20}
+        max={30}
         value={rest}
         onChange={(val) => {
           dispatch(updateRest(val))
@@ -45,8 +45,8 @@ export default function ModalScreen() {
       />
       <ConfigSlider
         title="每组击打次数："
-        min={8}
-        max={32}
+        min={4}
+        max={40}
         value={shots}
         onChange={(val) => {
           dispatch(updateShots(val))
@@ -55,7 +55,7 @@ export default function ModalScreen() {
       <ConfigSlider
         title="击打间隔（秒）："
         min={2}
-        max={10}
+        max={6}
         value={speed}
         onChange={(val) => {
           dispatch(updateSpeed(val))

@@ -8,8 +8,9 @@ export default {
     tint: tintColorLight,
     tabIconDefault: '#ccc',
     tabIconSelected: tintColorLight,
-    court: '#36BF8E',
+    court: '#39a78e',
     font: '#73757d',
+    pointDirection: '#cb464a',
   },
   dark: {
     text: '#fff',
@@ -17,7 +18,8 @@ export default {
     tint: tintColorDark,
     tabIconDefault: '#ccc',
     tabIconSelected: tintColorDark,
-    court: '#36BF8E',
+    court: '#39a78e',
     font: '#73757d',
+    pointDirection: '#cb464a',
   },
 };

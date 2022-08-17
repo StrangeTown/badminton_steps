@@ -1,5 +1,6 @@
 import { useNavigation } from '@react-navigation/native'
-import { Button, StyleSheet, Text, View } from 'react-native'
+import { Button, Image, StyleSheet, Text, View } from 'react-native'
+import AppButton from './base/AppButton'
 
 export default function CourtFinish() {
   const navigation = useNavigation()
@@ -7,13 +8,17 @@ export default function CourtFinish() {
   return (
     <View style={styles.container}>
       <View style={styles.main}>
-        <View>
-          <Button
-            title="完成"
+        <Image
+          style={styles.img}
+          source={require('../assets/images/salman-hossain-saif-n3HjfZPuT5w-unsplash.jpeg')}
+        />
+        <View style={styles.buttonWrap}>
+          <AppButton
+            title="完成训练"
             onPress={() => {
               navigation.goBack()
             }}
-          ></Button>
+          />
         </View>
       </View>
     </View>
@@ -31,16 +36,17 @@ const styles = StyleSheet.create({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.1)'
+    backgroundColor: 'rgba(0, 0, 0, 0.1)',
   },
   main: {
     backgroundColor: '#fff',
-    padding: 30,
     width: 320,
-    height: 200,
+    height: 320,
+    paddingBottom: 30,
     borderRadius: 10,
     display: 'flex',
-    justifyContent: 'center',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
     alignItems: 'center',
     shadowColor: 'rgba(0, 0, 0, 0.5)',
     shadowOffset: {
@@ -48,6 +54,15 @@ const styles = StyleSheet.create({
       width: 3,
     },
     shadowOpacity: 1,
-    shadowRadius: 10
+    shadowRadius: 10,
+  },
+  img: {
+    width: 320,
+    height: 200,
+    borderTopRightRadius: 10,
+    borderTopLeftRadius: 10,
+  },
+  buttonWrap: {
+    // marginTop: 30,
   },
 })

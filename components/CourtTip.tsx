@@ -1,5 +1,7 @@
 import { useNavigation } from '@react-navigation/native'
 import { Button, StyleSheet, Text, View } from 'react-native'
+import Colors from '../constants/Colors'
+import AppButton from './base/AppButton'
 
 interface Props {
   onStartClick: () => void
@@ -13,34 +15,39 @@ export default function CourtTip({ onStartClick }: Props) {
       <View style={styles.main}>
         <View style={styles.legend}>
           <View style={styles.point}>
-            <View style={styles.direction}></View>
+            <View style={styles.directionWrap}>
+              <View style={styles.direction}></View>
+            </View>
           </View>
           <View style={styles.tip}>
             <View style={styles.white}></View>
-            <Text>
-              白色区域表示<Text style={styles.tipVal}>击球位置</Text>
+            <Text style={styles.tipVal}>
+              白色圆形表示<Text style={styles.tipValBold}>击球站位</Text>
             </Text>
           </View>
           <View style={styles.tip}>
             <View style={styles.red}></View>
-            <Text>
-              红色区域表示<Text style={styles.tipVal}>击打方向</Text>
+            <Text style={styles.tipVal}>
+              红色区域表示<Text style={styles.tipValBold}>击打方向</Text>
             </Text>
           </View>
         </View>
         <View>
-          <Button
+          <AppButton
             title="开始吧"
             onPress={() => {
               onStartClick()
             }}
-          ></Button>
-          <Button
-            title="返回"
-            onPress={() => {
-              navigation.goBack()
-            }}
-          ></Button>
+          />
+          <View style={styles.backWrap}>
+            <AppButton
+              title="返回"
+              onPress={() => {
+                navigation.goBack()
+              }}
+              type="text"
+            />
+          </View>
         </View>
       </View>
     </View>
@@ -63,8 +70,9 @@ const styles = StyleSheet.create({
   main: {
     backgroundColor: '#fff',
     padding: 30,
+    paddingTop: 60,
     width: 320,
-    height: 500,
+    height: 520,
     borderRadius: 10,
     display: 'flex',
     justifyContent: 'space-between',
@@ -88,16 +96,29 @@ const styles = StyleSheet.create({
     height: 100,
     borderRadius: 200,
     backgroundColor: '#fff',
-    borderColor: '#ddd',
-    borderWidth: 1,
     position: 'relative',
+    shadowColor: '#000',
+    shadowOpacity: 0.2,
+    shadowOffset: {
+      width: 0,
+      height: 0
+    },
+    shadowRadius: 10
+  },
+  directionWrap: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
     overflow: 'hidden',
+    borderRadius: 200,
   },
   direction: {
     position: 'absolute',
-    backgroundColor: 'red',
-    width: 100,
-    height: 100,
+    backgroundColor: '#cb464a',
+    width: 60,
+    height: 60,
     left: '50%',
     top: '50%',
   },
@@ -108,22 +129,38 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   tipVal: {
+    color: Colors.light.font,
+  },
+  tipValBold: {
     fontWeight: 'bold',
   },
   white: {
     width: 30,
     height: 20,
     backgroundColor: '#fff',
-    borderWidth: 1,
-    borderColor: '#ccc',
     marginRight: 10,
+    shadowColor: '#000',
+    shadowOpacity: 0.1,
+    shadowOffset: {
+      width: 0,
+      height: 0
+    },
+    shadowRadius: 4
   },
   red: {
     width: 30,
     height: 20,
-    backgroundColor: 'red',
-    // borderWidth: 1,
-    borderColor: '#aaa',
+    backgroundColor: '#cb464a',
     marginRight: 10,
+    shadowColor: '#000',
+    shadowOpacity: 0.3,
+    shadowOffset: {
+      width: 0,
+      height: 0
+    },
+    shadowRadius: 4
   },
+  backWrap: {
+    marginTop: 5
+  }
 })

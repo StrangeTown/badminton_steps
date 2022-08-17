@@ -8,24 +8,34 @@ interface Props {
   phase: string
 }
 
+let countdownInterval: number | undefined = undefined
+
 export default function ({ initialNum, onFinish, phase }: Props) {
   const [countdownNum, setCountdownNum] = useState(initialNum)
 
   const tick = () => {
     setCountdownNum((num) => {
-      if (num === 0) {
-        onFinish()
-        return 0
-      }
-      return num - 1
+      return Math.max(num - 1, 1)
     })
   }
 
   useEffect(() => {
-    const intervalid = setInterval(() => {
+    if (countdownNum === 1) {
+      clearInterval(countdownInterval)
+      setTimeout(() => {
+        onFinish()
+      }, 1000)
+    }
+  }, [countdownNum])
+
+  useEffect(() => {
+    countdownInterval = window.setInterval(() => {
       tick()
     }, 1000)
-    return () => intervalid && clearTimeout(intervalid)
+
+    return () => {
+      if (countdownInterval) clearTimeout(countdownInterval)
+    }
   }, [])
 
   return (
@@ -52,12 +62,6 @@ const styles = StyleSheet.create({
   },
   countVal: {
     fontSize: 300,
-    textShadowColor: "rgba(0, 0, 0, 0.2)",
-    textShadowOffset: {
-      width: 6,
-      height: 6,
-    },
-    textShadowRadius: 6,
     color: "#555",
   },
   phase: {
@@ -69,13 +73,13 @@ const styles = StyleSheet.create({
     padding: 10,
     paddingRight: 30,
     paddingLeft: 30,
-    borderRadius: 5,
-    shadowColor: 'rgba(0,0, 0, 0.3)',
-    shadowOpacity: 1,
-    shadowRadius: 3,
-    shadowOffset: {
-      width: 3,
-      height: 3
-    }
+    // borderRadius: 5,
+    // shadowColor: 'rgba(0,0, 0, 0.3)',
+    // shadowOpacity: 1,
+    // shadowRadius: 3,
+    // shadowOffset: {
+    //   width: 3,
+    //   height: 3
+    // }
   }
 })

@@ -1,4 +1,5 @@
 import { Image, StyleSheet, Text, View } from 'react-native'
+import Colors from '../constants/Colors'
 
 export const pointPoisitions = [
   '0-0',
@@ -102,6 +103,13 @@ const styles = StyleSheet.create({
     borderColor: '#ddd',
     borderStyle: 'dashed',
     position: 'relative',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 3,
+      height: 3,
+    },
+    shadowOpacity: 0.4,
+    shadowRadius: 10,
   },
   pointActive: {
     backgroundColor: '#fff',
@@ -109,10 +117,10 @@ const styles = StyleSheet.create({
   },
   direction: {
     position: 'absolute',
-    top: 0,
-    left: 0,
-    width: '100%',
-    height: '100%',
+    top: -1,
+    left: -1,
+    width: '102%',
+    height: '102%',
     overflow: 'hidden',
     borderRadius: 100,
   },
@@ -122,6 +130,6 @@ const styles = StyleSheet.create({
     top: '50%',
     width: '54%',
     height: '54%',
-    backgroundColor: 'red',
+    backgroundColor: Colors.light.pointDirection,
   },
 })

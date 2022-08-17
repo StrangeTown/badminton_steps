@@ -5,10 +5,10 @@ import store from "../store"
 
 const initConfigFromStorage = async () => {
   const config = await persist.getConfig()
-  const sets = get(config, 'config.sets')
-  const rest = get(config, 'config.rest')
-  const shots = get(config, 'config.shots')
-  const speed = get(config, 'config.speed')
+  const sets = get(config, 'config.sets') || 3
+  const rest = get(config, 'config.rest') || 10
+  const shots = get(config, 'config.shots') || 12
+  const speed = get(config, 'config.speed') || 3
 
   store.dispatch(updateSets(sets))
   store.dispatch(updateRest(rest))

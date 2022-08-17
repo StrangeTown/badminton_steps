@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
   },
   configValueWrap: {
     borderRadius: 5,
-    backgroundColor: "#36BF8E",
+    backgroundColor: Colors.light.court,
     marginLeft: 2,
     marginRight: 2
   },
