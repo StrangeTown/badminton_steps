@@ -51,10 +51,13 @@ export default function TabTwoScreen({
         directionDegree: degree,
       })
     }
-
-    positionInterval = setInterval(() => {
+    const tick = () => {
       setRandomPosition()
       setCurrentShot((shot) => Math.max(shot - 1, 0))
+    }
+
+    positionInterval = setInterval(() => {
+      tick()
     }, speed * 1000)
   }
 
@@ -72,14 +75,16 @@ export default function TabTwoScreen({
   useEffect(() => {
     if (currentShot === 0) {
       clearInterval(positionInterval)
-      const sets = Math.max(leftSets - 1, 0)
-      setLeftSets(sets)
-      if (sets === 0) {
-        clearPosition()
-        setFinishedModalVisible(true)
-      } else {
-        startRest()
-      }
+      setTimeout(() => {
+        const sets = Math.max(leftSets - 1, 0)
+        setLeftSets(sets)
+        if (sets === 0) {
+          clearPosition()
+          setFinishedModalVisible(true)
+        } else {
+          startRest()
+        }
+      }, 3000)
     }
   }, [currentShot])
 

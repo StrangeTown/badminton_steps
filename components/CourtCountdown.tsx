@@ -31,7 +31,7 @@ export default function ({ initialNum, onFinish, phase }: Props) {
   useEffect(() => {
     countdownInterval = window.setInterval(() => {
       tick()
-    }, 1000)
+    }, 1200)
 
     return () => {
       if (countdownInterval) clearTimeout(countdownInterval)
