@@ -168,7 +168,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     zIndex: 110,
     backgroundColor: 'transparent',
-    // display: 'none',
+    display: 'none',
   },
   shortServiceLine: {
     marginTop: '30%',

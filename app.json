@@ -2,7 +2,7 @@
   "expo": {
     "name": "羽毛球步法",
     "slug": "badminton_step",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
@@ -19,7 +19,8 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "life.whale.badminton"
     },
     "android": {
       "adaptiveIcon": {
