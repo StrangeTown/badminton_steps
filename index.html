@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>羽毛球步法</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      html,
+      body {
+        margin: 0;
+        background: #134e5e; /* fallback for old browsers */
+        background: -webkit-linear-gradient(
+          to left,
+          #71b280,
+          #134e5e
+        ); /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(
+          to left,
+          #71b280,
+          #134e5e
+        ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+      }
+      body {
+        padding: 10px;
+        box-sizing: border-box;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .main {
+        display: flex;
+        align-items: center;
+      }
+      .play {
+        width: 420px;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        border-radius: 8px;
+      }
+      .info {
+        margin-left: 60px;
+        font-family: 'Noto Sans TC', sans-serif;
+        color: #fff;
+        width: 500px;
+        background-color: rgba(77, 77, 77, 0.07);
+        padding: 20px;
+        border-radius: 4px;
+      }
+      .app_name {
+        font-size: 36px;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+      }
+      .icon {
+        width: 76px;
+        height: 76px;
+        object-fit: cover;
+        border-radius: 10px;
+        vertical-align: middle;
+        margin-right: 20px;
+      }
+      .feature {
+        margin-top: 20px;
+        font-size: 18px;
+      }
+      .contact {
+        margin-top: 60px;
+        font-size: 14px;
+      }
+      .contact a {
+        color: #fff;
+        text-decoration: underline;
+      }
+    </style>
+    <style>
+      @media screen and (max-width: 700px) {
+        body {
+          background-image: url('https://s1.ax1x.com/2022/08/18/vrEw0H.jpg');
+          background-position: center;
+          background-size: cover;
+        }
+        .main {
+          flex-direction: column;
+        }
+        .play {
+          display: none;
+        }
+        .info {
+          width: initial;
+          margin-left: 0;
+          background-color: #11445173;
+          padding-top: 30px;
+          padding-bottom: 30px;
+        }
+        .app_name {
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main">
+      <img
+        src="https://s1.ax1x.com/2022/08/18/vrEw0H.jpg"
+        alt=""
+        class="play"
+      />
+      <div class="info">
+        <div class="app_name">
+          <img class="icon" src="https://s1.ax1x.com/2022/08/22/v6GbdA.png" />
+          羽毛球步法
+        </div>
+        <div class="feature">
+          随时随地训练羽毛球步法<br/>软件完全离线，不需要任何用户数据，也不会发送任何网络请求，不用担心隐私问题
+        </div>
+        <div class="contact">联系我们：
+          <a href="mailto:yinxingdyx@163.com">yinxingdyx@163.com</a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
