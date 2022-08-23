@@ -1,6 +1,7 @@
 import { useNavigation } from '@react-navigation/native'
 import { Button, StyleSheet, Text, View } from 'react-native'
 import Colors from '../constants/Colors'
+import i18n from '../services/i18n'
 import AppButton from './base/AppButton'
 
 interface Props {
@@ -22,26 +23,26 @@ export default function CourtTip({ onStartClick }: Props) {
           <View style={styles.tip}>
             <View style={styles.white}></View>
             <Text style={styles.tipVal}>
-              白色圆形表示<Text style={styles.tipValBold}>击球站位</Text>
+              {i18n.t('white_area')}<Text style={styles.tipValBold}>{i18n.t('position')}</Text>
             </Text>
           </View>
           <View style={styles.tip}>
             <View style={styles.red}></View>
             <Text style={styles.tipVal}>
-              红色区域表示<Text style={styles.tipValBold}>击打方向</Text>
+              {i18n.t('red_area')}<Text style={styles.tipValBold}>{i18n.t('direction')}</Text>
             </Text>
           </View>
         </View>
         <View>
           <AppButton
-            title="开始吧"
+            title={i18n.t('Let_go')}
             onPress={() => {
               onStartClick()
             }}
           />
           <View style={styles.backWrap}>
             <AppButton
-              title="返回"
+              title={i18n.t('back')}
               onPress={() => {
                 navigation.goBack()
               }}

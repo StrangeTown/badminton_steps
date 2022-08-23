@@ -9,10 +9,9 @@ import EditScreenInfo from '../components/EditScreenInfo'
 import { Text, View } from '../components/Themed'
 import Colors from '../constants/Colors'
 import { useAppSelector } from '../hooks/reduxHooks'
+import i18n from '../services/i18n'
 import { RootTabScreenProps } from '../types'
 import { selectRest, selectSets, selectShots, selectSpeed } from './configSlice'
-
-
 
 let positionInterval: any = null
 
@@ -97,7 +96,7 @@ export default function TabTwoScreen({
     setCountdownNum(5)
   }
 
-  const phaseString = `第${sets - leftSets + 1}组`
+  const phaseString = i18n.t('currentSets', { number: sets - leftSets + 1 })
 
   return (
     <SafeAreaView style={styles.container}>
@@ -110,9 +109,7 @@ export default function TabTwoScreen({
           ></Button>
         </View>
       )}
-      {
-        finishedModalVisible && <CourtFinish />
-      }
+      {finishedModalVisible && <CourtFinish />}
       {tipVisible && (
         <CourtTip
           onStartClick={() => {

@@ -49,5 +49,6 @@ const styles = StyleSheet.create({
   },
   textTextType: {
     color: '#6b5a5a',
+    fontWeight: 'normal',
   },
 })

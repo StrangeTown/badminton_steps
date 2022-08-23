@@ -6,6 +6,7 @@ import persist from '../utils/persist'
 import { RootTabScreenProps } from '../types'
 import Colors from '../constants/Colors'
 import AppButton from '../components/base/AppButton'
+import i18n from '../services/i18n'
 
 export default function TabOneScreen({
   navigation,
@@ -24,7 +25,7 @@ export default function TabOneScreen({
           onPress={() => {
             gotoPlay()
           }}
-          title={'进入步法训练'}
+          title={i18n.t('gotoPlay')}
         />
       </View>
     </View>

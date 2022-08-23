@@ -5,6 +5,7 @@ import EditScreenInfo from '../components/EditScreenInfo'
 import { Text, View } from '../components/Themed'
 import Colors from '../constants/Colors'
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks'
+import i18n from '../services/i18n'
 import {
   selectRest,
   selectSets,
@@ -26,7 +27,7 @@ export default function ModalScreen() {
   return (
     <View style={styles.container}>
       <ConfigSlider
-        title="组数："
+        title={i18n.t('sets_title')}
         min={1}
         max={7}
         value={sets}
@@ -35,7 +36,7 @@ export default function ModalScreen() {
         }}
       />
       <ConfigSlider
-        title="每组间隔（秒）："
+        title={i18n.t('rest_title')}
         min={5}
         max={30}
         value={rest}
@@ -44,7 +45,7 @@ export default function ModalScreen() {
         }}
       />
       <ConfigSlider
-        title="每组击打次数："
+        title={i18n.t('shots_title')}
         min={4}
         max={40}
         value={shots}
@@ -53,7 +54,7 @@ export default function ModalScreen() {
         }}
       />
       <ConfigSlider
-        title="击打间隔（秒）："
+        title={i18n.t('speed_title')}
         min={2}
         max={6}
         value={speed}

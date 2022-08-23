@@ -1,5 +1,6 @@
 import { useNavigation } from '@react-navigation/native'
 import { Button, Image, StyleSheet, Text, View } from 'react-native'
+import i18n from '../services/i18n'
 import AppButton from './base/AppButton'
 
 export default function CourtFinish() {
@@ -14,7 +15,7 @@ export default function CourtFinish() {
         />
         <View style={styles.buttonWrap}>
           <AppButton
-            title="完成训练"
+            title={i18n.t('finish')}
             onPress={() => {
               navigation.goBack()
             }}

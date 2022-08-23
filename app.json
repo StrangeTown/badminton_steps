@@ -20,7 +20,13 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "life.whale.badminton"
+      "bundleIdentifier": "life.whale.badminton",
+      "infoPlist": {
+        "CFBundleAllowMixedLocalizations": true
+      }
+    },
+    "locales": {
+      "en": "./services/i18n/english.json"
     },
     "android": {
       "adaptiveIcon": {
