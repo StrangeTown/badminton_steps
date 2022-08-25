@@ -1,8 +1,7 @@
 import Slider from "@react-native-community/slider"
 import { useState } from "react"
-import { StyleSheet } from "react-native"
+import { StyleSheet, Text, View } from "react-native"
 import Colors from "../constants/Colors"
-import { Text, View } from "./Themed"
 
 interface Props {
   title: string,

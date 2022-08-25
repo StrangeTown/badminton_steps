@@ -1,8 +1,7 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import ConfigSlider from '../components/ConfigSlider'
 
 import EditScreenInfo from '../components/EditScreenInfo'
-import { Text, View } from '../components/Themed'
 import Colors from '../constants/Colors'
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks'
 import i18n from '../services/i18n'

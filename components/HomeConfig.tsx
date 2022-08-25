@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/native'
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 import Colors from '../constants/Colors'
 import { useAppSelector } from '../hooks/reduxHooks'
 import {
@@ -9,7 +9,6 @@ import {
   selectSpeed,
 } from '../screens/configSlice'
 import i18n from '../services/i18n'
-import { Text, View } from './Themed'
 
 export default function HomeConfig() {
   const sets = useAppSelector(selectSets)

@@ -1,5 +1,4 @@
-import { Pressable, StyleSheet } from 'react-native'
-import { Text } from '../Themed'
+import { Pressable, StyleSheet, Text } from 'react-native'
 
 interface Props {
   onPress: () => void
@@ -30,7 +29,6 @@ export default function AppButton({ onPress, title, type, color }: Props) {
 
 const styles = StyleSheet.create({
   container: {
-    // backgroundColor: '#17462e',
     backgroundColor: '#6b5a5a',
     padding: 16,
     paddingRight: 50,

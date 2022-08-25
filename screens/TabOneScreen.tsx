@@ -1,7 +1,6 @@
-import { Pressable, StyleSheet } from 'react-native'
+import { Pressable, StyleSheet, View } from 'react-native'
 
 import HomeConfig from '../components/HomeConfig'
-import { Text, View } from '../components/Themed'
 import persist from '../utils/persist'
 import { RootTabScreenProps } from '../types'
 import Colors from '../constants/Colors'
