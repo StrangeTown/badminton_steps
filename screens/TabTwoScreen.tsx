@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Button, SafeAreaView, StyleSheet } from 'react-native'
 import CourtCountdown from '../components/CourtCountdown'
 import CourtFinish from '../components/CourtFinish'
+import CourtOptions from '../components/CourtOptions'
 import CourtPoints, { pointPoisitions } from '../components/CourtPoints'
 import CourtTip from '../components/CourtTip'
 
@@ -33,6 +34,7 @@ export default function TabTwoScreen({
   const [leftSets, setLeftSets] = useState(sets)
   const [layerVisible, setLayerVisible] = useState(false)
   const [finishedModalVisible, setFinishedModalVisible] = useState(false)
+  const [optionsVisible, setOptionsVisible] = useState(false)
 
   const startPlay = () => {
     setCurrentShot(shots)
@@ -97,6 +99,9 @@ export default function TabTwoScreen({
   }
 
   const phaseString = i18n.t('currentSets', { number: sets - leftSets + 1 })
+  const hadnleMainTouch = () => {
+    setOptionsVisible((visible) => !visible)
+  }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -117,7 +122,8 @@ export default function TabTwoScreen({
           }}
         />
       )}
-      <View style={styles.main}>
+      {optionsVisible && <CourtOptions />}
+      <View style={styles.main} onTouchEnd={hadnleMainTouch}>
         {countdownNum > 0 && (
           <CourtCountdown
             initialNum={countdownNum}

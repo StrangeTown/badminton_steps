@@ -5,8 +5,9 @@ interface Props {
   onPress: () => void
   title: string
   type?: 'text' | 'default' | undefined
+  color?: string
 }
-export default function AppButton({ onPress, title, type }: Props) {
+export default function AppButton({ onPress, title, type, color }: Props) {
   return (
     <Pressable
       style={[styles.container, type === 'text' && styles.containerTextType]}
@@ -14,7 +15,13 @@ export default function AppButton({ onPress, title, type }: Props) {
         onPress()
       }}
     >
-      <Text style={[styles.text, type === 'text' && styles.textTextType]}>
+      <Text
+        style={[
+          styles.text,
+          type === 'text' && styles.textTextType,
+          !!color && { color }
+        ]}
+      >
         {title}
       </Text>
     </Pressable>
