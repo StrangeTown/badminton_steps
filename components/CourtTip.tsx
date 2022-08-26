@@ -23,26 +23,26 @@ export default function CourtTip({ onStartClick }: Props) {
           <View style={styles.tip}>
             <View style={styles.white}></View>
             <Text style={styles.tipVal}>
-              {i18n.t('white_area')}<Text style={styles.tipValBold}>{i18n.t('position')}</Text>
+              {i18n.t('kWhiteArea')}<Text style={styles.tipValBold}>{i18n.t('kPosition')}</Text>
             </Text>
           </View>
           <View style={styles.tip}>
             <View style={styles.red}></View>
             <Text style={styles.tipVal}>
-              {i18n.t('red_area')}<Text style={styles.tipValBold}>{i18n.t('direction')}</Text>
+              {i18n.t('kRedArea')}<Text style={styles.tipValBold}>{i18n.t('kDirection')}</Text>
             </Text>
           </View>
         </View>
         <View>
           <AppButton
-            title={i18n.t('Let_go')}
+            title={i18n.t('kLetGo')}
             onPress={() => {
               onStartClick()
             }}
           />
           <View style={styles.backWrap}>
             <AppButton
-              title={i18n.t('back')}
+              title={i18n.t('kBack')}
               onPress={() => {
                 navigation.goBack()
               }}

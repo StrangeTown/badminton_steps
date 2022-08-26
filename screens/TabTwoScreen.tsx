@@ -100,7 +100,7 @@ export default function TabTwoScreen({
     setCountdownNum(5)
   }
 
-  const phaseString = i18n.t('currentSets', { number: sets - leftSets + 1 })
+  const phaseString = i18n.t('kCurrentSets', { number: sets - leftSets + 1 })
   const hadnleMainTouch = () => {
     setOptionsVisible((visible) => !visible)
   }

@@ -10,7 +10,7 @@ export default function CourtOptions() {
   return (
     <View style={styles.container}>
       <AppButton
-        title={i18n.t('back')}
+        title={i18n.t('kBack')}
         onPress={() => {
           navigation.goBack()
         }}

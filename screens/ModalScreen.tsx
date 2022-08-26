@@ -26,7 +26,7 @@ export default function ModalScreen() {
   return (
     <View style={styles.container}>
       <ConfigSlider
-        title={i18n.t('sets_title')}
+        title={i18n.t('kSetsTitle')}
         min={1}
         max={7}
         value={sets}
@@ -35,16 +35,7 @@ export default function ModalScreen() {
         }}
       />
       <ConfigSlider
-        title={i18n.t('rest_title')}
-        min={5}
-        max={30}
-        value={rest}
-        onChange={(val) => {
-          dispatch(updateRest(val))
-        }}
-      />
-      <ConfigSlider
-        title={i18n.t('shots_title')}
+        title={i18n.t('kShotsTitle')}
         min={4}
         max={40}
         value={shots}
@@ -53,7 +44,16 @@ export default function ModalScreen() {
         }}
       />
       <ConfigSlider
-        title={i18n.t('speed_title')}
+        title={i18n.t('kRestTitle')}
+        min={5}
+        max={30}
+        value={rest}
+        onChange={(val) => {
+          dispatch(updateRest(val))
+        }}
+      />
+      <ConfigSlider
+        title={i18n.t('kSpeedTitle')}
         min={2}
         max={6}
         value={speed}

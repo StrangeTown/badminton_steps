@@ -24,7 +24,7 @@ export default function TabOneScreen({
           onPress={() => {
             gotoPlay()
           }}
-          title={i18n.t('gotoPlay')}
+          title={i18n.t('kGotoPlay')}
         />
       </View>
     </View>

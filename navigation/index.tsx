@@ -43,7 +43,7 @@ function RootNavigator() {
       <Stack.Screen name="Practice" component={TabTwoScreen} options={{ headerShown: false, gestureEnabled: false }} />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
-        <Stack.Screen name="Modal" component={ModalScreen} options={{title: i18n.t('config')}}/>
+        <Stack.Screen name="Modal" component={ModalScreen} options={{title: i18n.t('kConfig')}}/>
       </Stack.Group>
     </Stack.Navigator>
   );

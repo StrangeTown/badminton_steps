@@ -15,7 +15,7 @@ export default function CourtFinish() {
         />
         <View style={styles.buttonWrap}>
           <AppButton
-            title={i18n.t('finish')}
+            title={i18n.t('kFinish')}
             onPress={() => {
               navigation.goBack()
             }}
