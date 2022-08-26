@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Button, SafeAreaView, StyleSheet } from 'react-native'
+import { useKeepAwake } from 'expo-keep-awake'
 import CourtCountdown from '../components/CourtCountdown'
 import CourtFinish from '../components/CourtFinish'
 import CourtOptions from '../components/CourtOptions'
@@ -19,6 +20,7 @@ let positionInterval: any = null
 export default function TabTwoScreen({
   navigation,
 }: RootTabScreenProps<'TabOne'>) {
+  useKeepAwake()
   const sets = useAppSelector(selectSets)
   const rest = useAppSelector(selectRest)
   const shots = useAppSelector(selectShots)
