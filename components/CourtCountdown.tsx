@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { StyleSheet, Text, View } from "react-native"
+import { Platform, StyleSheet, Text, View } from "react-native"
 import Colors from "../constants/Colors"
 
 interface Props {
@@ -38,12 +38,18 @@ export default function ({ initialNum, onFinish, phase }: Props) {
     }
   }, [])
 
+  let countValStyle = styles.countVal
+  // support ipad
+  if (Platform.OS === 'ios' && Platform.isPad) {
+    countValStyle = {...countValStyle, ...styles.countValPad}
+  }
+
   return (
     <View style={styles.countdown}>
       <View style={styles.phaseWapper}>
         <Text style={styles.phase}>{phase}</Text>
       </View>
-      <Text style={styles.countVal}>{countdownNum}</Text>
+      <Text style={countValStyle}>{countdownNum}</Text>
     </View>
   )
 }
@@ -64,6 +70,9 @@ const styles = StyleSheet.create({
     fontSize: 300,
     color: "#555",
   },
+  countValPad: {
+    fontSize: 500,
+  },
   phase: {
     fontSize: 24,
     color: Colors.light.font
@@ -73,13 +82,5 @@ const styles = StyleSheet.create({
     padding: 10,
     paddingRight: 30,
     paddingLeft: 30,
-    // borderRadius: 5,
-    // shadowColor: 'rgba(0,0, 0, 0.3)',
-    // shadowOpacity: 1,
-    // shadowRadius: 3,
-    // shadowOffset: {
-    //   width: 3,
-    //   height: 3
-    // }
   }
 })

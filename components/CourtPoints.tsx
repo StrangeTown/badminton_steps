@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View } from 'react-native'
+import { Image, Platform, StyleSheet, Text, View } from 'react-native'
 import Colors from '../constants/Colors'
 
 export const pointPoisitions = [
@@ -49,20 +49,28 @@ export default function CourtPoints({ activePoint }: Props) {
           <View style={styles.row} key={val}>
             {[1, 2, 3].map((val, pointidx) => {
               const position = `${rowidx}-${pointidx}`
-              if (position === '1-1') return <View key={'1-1'}></View>
 
+              if (position === '1-1') return <View key={'1-1'}></View>
               const isActive = position === activePoint.position
+              let pointStyle = styles.point
+
+              // support ipad
+              if (Platform.OS === 'ios' && Platform.isPad) {
+                pointStyle = {...pointStyle, ...styles.pointPad}
+              }
+
+              if (isActive) {
+                pointStyle = {
+                  ...pointStyle,
+                  ...styles.pointActive
+                }
+              }
 
               return (
                 <View
                   key={position}
                   style={
-                    isActive
-                      ? {
-                          ...styles.point,
-                          ...styles.pointActive,
-                        }
-                      : styles.point
+                    pointStyle
                   }
                 >
                   {isActive && (
@@ -78,6 +86,7 @@ export default function CourtPoints({ activePoint }: Props) {
   )
 }
 
+const pointSize = 110
 const styles = StyleSheet.create({
   points: {
     position: 'absolute',
@@ -95,8 +104,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   point: {
-    width: 110,
-    height: 110,
+    width: pointSize,
+    height: pointSize,
     borderRadius: 300,
     backgroundColor: 'transparent',
     borderWidth: 1,
@@ -110,6 +119,10 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.4,
     shadowRadius: 10,
+  },
+  pointPad: {
+    width: pointSize * 2,
+    height: pointSize * 2,
   },
   pointActive: {
     backgroundColor: '#fff',

@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, View } from 'react-native'
+import { Platform, Pressable, StyleSheet, Text, View } from 'react-native'
 
 import HomeConfig from '../components/HomeConfig'
 import persist from '../utils/persist'
