@@ -26,6 +26,10 @@ const Row = ({ rowidx, actionDisabled }: RowProps) => {
         const position = `${rowidx}-${idx}`
         const isActive = points.includes(position)
 
+        if (position === '1-1') {
+          return <View></View>
+        }
+
         return (
           <View
             style={[styles.point, isActive && styles.pointActive]}
@@ -63,7 +67,7 @@ export default function HomeConfigPoints({ type }: ContainerProps) {
 }
 
 const containerWidth = 140
-const containerHeight = 160
+const containerHeight = containerWidth * 1.1
 const styles = StyleSheet.create({
   container: {
     width: containerWidth,
