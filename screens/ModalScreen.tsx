@@ -2,6 +2,7 @@ import { StyleSheet, View } from 'react-native'
 import ConfigSlider from '../components/ConfigSlider'
 
 import EditScreenInfo from '../components/EditScreenInfo'
+import HomeConfigPoints from '../components/HomeConfigPoints'
 import Colors from '../constants/Colors'
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks'
 import i18n from '../services/i18n'
@@ -25,42 +26,46 @@ export default function ModalScreen() {
 
   return (
     <View style={styles.container}>
-      <ConfigSlider
-        title={i18n.t('kSetsTitle')}
-        min={1}
-        max={7}
-        value={sets}
-        onChange={(val) => {
-          dispatch(updateSets(val))
-        }}
-      />
-      <ConfigSlider
-        title={i18n.t('kShotsTitle')}
-        min={4}
-        max={40}
-        value={shots}
-        onChange={(val) => {
-          dispatch(updateShots(val))
-        }}
-      />
-      <ConfigSlider
-        title={i18n.t('kRestTitle')}
-        min={5}
-        max={30}
-        value={rest}
-        onChange={(val) => {
-          dispatch(updateRest(val))
-        }}
-      />
-      <ConfigSlider
-        title={i18n.t('kSpeedTitle')}
-        min={2}
-        max={6}
-        value={speed}
-        onChange={(val) => {
-          dispatch(updateSpeed(val))
-        }}
-      />
+      <HomeConfigPoints type='modal'/>
+
+      <View style={styles.sliders}>
+        <ConfigSlider
+          title={i18n.t('kSetsTitle')}
+          min={1}
+          max={7}
+          value={sets}
+          onChange={(val) => {
+            dispatch(updateSets(val))
+          }}
+        />
+        <ConfigSlider
+          title={i18n.t('kShotsTitle')}
+          min={4}
+          max={40}
+          value={shots}
+          onChange={(val) => {
+            dispatch(updateShots(val))
+          }}
+        />
+        <ConfigSlider
+          title={i18n.t('kRestTitle')}
+          min={5}
+          max={30}
+          value={rest}
+          onChange={(val) => {
+            dispatch(updateRest(val))
+          }}
+        />
+        <ConfigSlider
+          title={i18n.t('kSpeedTitle')}
+          min={2}
+          max={6}
+          value={speed}
+          onChange={(val) => {
+            dispatch(updateSpeed(val))
+          }}
+        />
+      </View>
     </View>
   )
 }
@@ -71,13 +76,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
-  },
+  sliders: {
+    marginTop: 20,
+  }
 })

@@ -37,10 +37,9 @@ export default function ConfigSlider({ title, max, min, value, onChange }: Props
 
 const styles = StyleSheet.create({
   container: {
-    marginBottom: 34,
+    marginBottom: 14,
   },
   title: {
-    // textAlign: 'center',
     fontSize: 16,
     color: Colors.dark.font,
   },

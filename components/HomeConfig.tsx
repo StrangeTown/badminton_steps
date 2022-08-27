@@ -8,6 +8,7 @@ import {
   selectShots,
 } from '../screens/configSlice'
 import i18n from '../services/i18n'
+import HomeConfigPoints from './HomeConfigPoints'
 
 export default function HomeConfig() {
   const sets = useAppSelector(selectSets)
@@ -17,7 +18,7 @@ export default function HomeConfig() {
 
   return (
     <View style={styles.container}>
-      <View></View>
+      <HomeConfigPoints type='home'/>
       <View
         style={styles.config}
         onTouchEnd={() => {
