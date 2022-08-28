@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react"
 import { Button, SafeAreaView, StyleSheet } from "react-native"
 import { useKeepAwake } from "expo-keep-awake"
+import { Audio } from "expo-av"
+
 import CourtCountdown from "../components/CourtCountdown"
 import CourtFinish from "../components/CourtFinish"
 import CourtOptions from "../components/CourtOptions"
@@ -44,11 +46,34 @@ export default function TabTwoScreen({
   const [layerVisible, setLayerVisible] = useState(false)
   const [finishedModalVisible, setFinishedModalVisible] = useState(false)
   const [optionsVisible, setOptionsVisible] = useState(false)
+  const [sound, setSound] = useState<any>()
+
+  async function playSound() {
+    // console.log("Loading Sound")
+    const { sound } = await Audio.Sound.createAsync(
+      require("../assets/audio/2.mp3")
+    )
+    setSound(sound)
+
+    // console.log("Playing Sound")
+    await sound.playAsync()
+  }
+
+  useEffect(() => {
+    return sound
+      ? () => {
+          // console.log("Unloading Sound")
+          sound.unloadAsync()
+        }
+      : undefined
+  }, [sound])
 
   const startPlay = () => {
     setCurrentShot(shots)
     const setRandomPosition = () => {
-      const position = pointPositions[Math.round(Math.random() * (pointPositions.length - 1))]
+      playSound()
+      const position =
+        pointPositions[Math.round(Math.random() * (pointPositions.length - 1))]
 
       const randomnum = Math.round(Math.random() * 3)
       const degree = 90 * randomnum
