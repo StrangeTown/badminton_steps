@@ -6,9 +6,9 @@ import { selectPoints, updatePoints } from "../screens/configSlice"
 
 type RowProps = {
   rowidx: number
-  actionDisabled: boolean
+  clickable: boolean
 }
-const Row = ({ rowidx, actionDisabled }: RowProps) => {
+const Row = ({ rowidx, clickable }: RowProps) => {
   const points = useAppSelector(selectPoints)
   const dispatch = useAppDispatch()
 
@@ -26,16 +26,20 @@ const Row = ({ rowidx, actionDisabled }: RowProps) => {
         const position = `${rowidx}-${idx}`
         const isActive = points.includes(position)
 
-        if (position === '1-1') {
-          return <View></View>
+        if (position === "1-1") {
+          return <View key={idx}></View>
         }
 
         return (
           <View
-            style={[styles.point, isActive && styles.pointActive]}
+            style={[
+              styles.point,
+              isActive && styles.pointActive,
+              clickable && styles.pointClickable,
+            ]}
             key={idx}
             onTouchEnd={() => {
-              if (actionDisabled) return
+              if (!clickable) return
               handlePointClick(position)
             }}
           ></View>
@@ -45,6 +49,16 @@ const Row = ({ rowidx, actionDisabled }: RowProps) => {
   )
 }
 
+const Lines = () => {
+  return (
+    <View style={styles.linesContainer}>
+      <View style={styles.shortServiceLine}></View>
+      <View style={styles.court}>
+        <View style={styles.centerLine}></View>
+      </View>
+    </View>
+  )
+}
 interface ContainerProps {
   type: "home" | "modal"
 }
@@ -59,8 +73,9 @@ export default function HomeConfigPoints({ type }: ContainerProps) {
         navigation.navigate("Modal")
       }}
     >
+      <Lines />
       {new Array(3).fill(1).map((val, idx) => {
-        return <Row rowidx={idx} key={idx} actionDisabled={type === "home"} />
+        return <Row rowidx={idx} key={idx} clickable={type === "modal"} />
       })}
     </View>
   )
@@ -68,6 +83,7 @@ export default function HomeConfigPoints({ type }: ContainerProps) {
 
 const containerWidth = 140
 const containerHeight = containerWidth * 1.1
+const pointSize = 20
 const styles = StyleSheet.create({
   container: {
     width: containerWidth,
@@ -77,6 +93,7 @@ const styles = StyleSheet.create({
     padding: 10,
     display: "flex",
     justifyContent: "space-between",
+    position: "relative",
   },
   containerModal: {
     width: containerWidth * 1.3,
@@ -89,12 +106,38 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   point: {
-    width: 20,
-    height: 20,
+    width: pointSize,
+    height: pointSize,
     borderRadius: 50,
     backgroundColor: "rgba(255,255,255,0.2)",
   },
   pointActive: {
     backgroundColor: "#fff",
+  },
+  pointClickable: {
+    width: pointSize * 1.4,
+    height: pointSize * 1.4,
+  },
+  linesContainer: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+  },
+  shortServiceLine: {
+    marginTop: "30%",
+    height: 2,
+    backgroundColor: "rgba(255,255,255,0.2)",
+  },
+  court: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    flex: 1,
+  },
+  centerLine: {
+    width: 2,
+    backgroundColor: "rgba(255,255,255,0.2)",
   },
 })
