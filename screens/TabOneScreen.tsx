@@ -11,7 +11,7 @@ export default function TabOneScreen({
   navigation,
 }: RootTabScreenProps<'TabOne'>) {
   const gotoPlay = () => {
-    persist.saveConfig()
+    persist.saveState()
     navigation.navigate('Practice')
   }
 

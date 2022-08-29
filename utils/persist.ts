@@ -1,22 +1,23 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import store from '../store'
 
-const saveConfig = async () => {
-  const config = store.getState()
-  const configStr = JSON.stringify(config)
-  await AsyncStorage.setItem("@BadmintonStepsStore:config", configStr);
+const storageKeyState = "@BadmintonStepsStore:state"
+const saveState = async () => {
+  const state = store.getState()
+  const stateStr = JSON.stringify(state)
+  await AsyncStorage.setItem(storageKeyState, stateStr);
 }
 
-const getConfig = async () => {
-  let storedConfig = await AsyncStorage.getItem("@BadmintonStepsStore:config");
-  if (storedConfig) {
-    return JSON.parse(storedConfig)
+const getStoredState = async () => {
+  let storedState = await AsyncStorage.getItem(storageKeyState);
+  if (storedState) {
+    return JSON.parse(storedState)
   } else {
     return undefined
   }
 }
 
 export default {
-  saveConfig,
-  getConfig
+  saveState,
+  getStoredState
 }

@@ -20,8 +20,10 @@ import {
   selectRest,
   selectSets,
   selectShots,
+  selectSoundEffect,
   selectSpeed,
 } from "./configSlice"
+import store from "../store"
 
 let positionInterval: any = null
 
@@ -34,6 +36,7 @@ export default function TabTwoScreen({
   const shots = useAppSelector(selectShots)
   const speed = useAppSelector(selectSpeed)
   const pointPositions = useAppSelector(selectPoints)
+  // const soundEffect = useAppSelector(selectSoundEffect)
 
   const [activePoint, setActivePoint] = useState({
     position: "",
@@ -49,6 +52,11 @@ export default function TabTwoScreen({
   const [sound, setSound] = useState<any>()
 
   async function playSound() {
+    const soundEffect = store.getState().config.soundEffect
+    if (!soundEffect) {
+      return
+    }
+
     // console.log("Loading Sound")
     const { sound } = await Audio.Sound.createAsync(
       require("../assets/audio/2.mp3")

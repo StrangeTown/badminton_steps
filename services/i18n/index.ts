@@ -19,6 +19,7 @@ const translations = {
     kBack: 'Back to Home',
     kCurrentSets: 'Set %{number}',
     kFinish: 'Completed!',
+    kSouncEffect: 'Sound Effect',
   },
   zh: {
     kSets: '%{val}组',
@@ -37,6 +38,7 @@ const translations = {
     kBack: '返回',
     kCurrentSets: '第%{number}组',
     kFinish: '完成训练',
+    kSouncEffect: '音效',
   },
   es: {
     kSets: 'Grupo %{val}',
@@ -55,6 +57,7 @@ const translations = {
     kBack: 'Regreso',
     kCurrentSets: '%{number} grupo',
     kFinish: 'Completa tu entrenamiento',
+    kSouncEffect: 'Efecto de sonido',
   },
   ko: {
     kSets: '% {val}',
@@ -73,6 +76,7 @@ const translations = {
     kBack: '돌아가',
     kCurrentSets: '%{number} 그룹',
     kFinish: '훈련을 완수하다',
+    kSouncEffect: '소리 효과',
   },
   ja: {
     kSets: '%{val}組',
@@ -91,6 +95,7 @@ const translations = {
     kBack: '戻る',
     kCurrentSets: '%{number}のグループ',
     kFinish: '訓練を終える',
+    kSouncEffect: '音声効果',
   },
   'zh-Hant': {
     kSets: '%{val}組',
@@ -109,6 +114,7 @@ const translations = {
     kBack: '返回',
     kCurrentSets: '第%{number}組',
     kFinish: '完成訓練',
+    kSouncEffect: '音效',
   }
 }
 

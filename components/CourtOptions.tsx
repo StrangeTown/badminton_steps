@@ -1,22 +1,61 @@
-import { StyleSheet } from 'react-native'
-import AppButton from './base/AppButton'
-import { View } from './Themed'
+import { StyleSheet, Switch, View, Text, Pressable } from 'react-native'
 import i18n from '../services/i18n/index'
 import { useNavigation } from '@react-navigation/native'
+import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks'
+import { selectSoundEffect, updateSoundEffect } from '../screens/configSlice'
+import Colors from '../constants/Colors'
+import persist from '../utils/persist'
+
+const Divider = () => {
+  return <View style={styles.divider} />
+}
+
+type OptionItemProps = {
+  title: string
+  value: boolean
+  onValueChange: (value: boolean) => void
+}
+const OptionItem = ({ title, value, onValueChange }: OptionItemProps) => {
+  return (
+    <View style={styles.item}>
+      <Text style={styles.title}>{title}</Text>
+      <Switch
+        trackColor={{ false: '#767577', true: Colors.light.court }}
+        thumbColor={'#f4f3f4'}
+        ios_backgroundColor="#3e3e3e"
+        onValueChange={onValueChange}
+        value={value}
+      />
+    </View>
+  )
+}
 
 export default function CourtOptions() {
   const navigation = useNavigation()
+  const soundEffect = useAppSelector(selectSoundEffect)
+  const dispatch = useAppDispatch()
 
   return (
     <View style={styles.container}>
-      <AppButton
-        title={i18n.t('kBack')}
-        onPress={() => {
-          navigation.goBack()
+      <OptionItem 
+        title={i18n.t('kSouncEffect')}
+        value={soundEffect}
+        onValueChange={(value) => {
+          dispatch(updateSoundEffect(value))
+          persist.saveState()
         }}
-        type='text'
-        color='#fff'
       />
+      <Divider />
+      <View style={styles.goBackWrap}>
+        <Pressable
+          style={styles.goBackButton}
+          onTouchEnd={() => {
+            navigation.goBack()
+          }}
+        >
+          <Text>{i18n.t('kBack')}</Text>
+        </Pressable>
+      </View>
     </View>
   )
 }
@@ -27,14 +66,52 @@ const styles = StyleSheet.create({
     left: 0,
     top: 0,
     right: 0,
-    height: 100,
+    height: 200,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-end',
     zIndex: 10,
-    backgroundColor: 'rgba(0, 0, 0, 0.2)',
+    backgroundColor: 'rgba(0, 0, 0, 0.3)',
+  },
+  divider: {
+    width: '100%',
+    height: 1,
+    backgroundColor: '#fff',
+  },
+  item: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    width: '100%',
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#fff',
+    marginBottom: 10,
+  },
+  goBackWrap: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    width: '100%',
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+  },
+  goBackButton: {
+    width: '100%',
+    height: 40,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 10,
+    backgroundColor: '#fff',
     shadowColor: '#000',
-    shadowOpacity: 0.9,
+    shadowOpacity: 0.2,
     shadowOffset: {
       width: 0,
       height: 14,
