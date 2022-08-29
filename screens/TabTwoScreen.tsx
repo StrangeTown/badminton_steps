@@ -93,9 +93,6 @@ export default function TabTwoScreen({
     const tick = () => {
       const dynamicSpeed = store.getState().config.dynamicSpeed
       const doAction = () => {
-        // log time
-        const date = new Date()
-        console.log(`${date.getMinutes()}:${date.getSeconds()} ${date.getMilliseconds()}`)
         setRandomPosition()
         setCurrentShot((shot) => Math.max(shot - 1, 0))
       }
