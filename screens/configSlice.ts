@@ -8,7 +8,8 @@ interface ConfigState {
   shots: number
   speed: number
   points: string[]
-  soundEffect: boolean
+  soundEffect: boolean,
+  dynamicSpeed: boolean,
 }
 
 const initialState: ConfigState = {
@@ -18,6 +19,7 @@ const initialState: ConfigState = {
   speed: Config.speed,
   points: Config.points,
   soundEffect: Config.soundEffect,
+  dynamicSpeed: Config.dynamicSpeed,
 }
 
 export const configSlice = createSlice({
@@ -42,6 +44,9 @@ export const configSlice = createSlice({
     updateSoundEffect: (state, action: PayloadAction<boolean>) => {
       state.soundEffect = action.payload
     },
+    updateDynamicSpeed: (state, action: PayloadAction<boolean>) => {
+      state.dynamicSpeed = action.payload
+    }
   },
 })
 
@@ -52,6 +57,7 @@ export const {
   updateSpeed,
   updatePoints,
   updateSoundEffect,
+  updateDynamicSpeed,
 } = configSlice.actions
 export const selectSets = (state: RootState) => state.config.sets
 export const selectRest = (state: RootState) => state.config.rest
@@ -59,4 +65,5 @@ export const selectShots = (state: RootState) => state.config.shots
 export const selectSpeed = (state: RootState) => state.config.speed
 export const selectPoints = (state: RootState) => state.config.points
 export const selectSoundEffect = (state: RootState) => state.config.soundEffect
+export const selectDynamicSpeed = (state: RootState) => state.config.dynamicSpeed
 export default configSlice.reducer

@@ -20,6 +20,7 @@ const translations = {
     kCurrentSets: 'Set %{number}',
     kFinish: 'Completed!',
     kSouncEffect: 'Sound Effect',
+    kDynamicSpeed: 'Dynamic Speed',
   },
   zh: {
     kSets: '%{val}组',
@@ -35,10 +36,11 @@ const translations = {
     kRedArea: '红色区域表示',
     kDirection: '击打方向',
     kLetGo: '开始吧',
-    kBack: '返回',
+    kBack: '返回首页',
     kCurrentSets: '第%{number}组',
     kFinish: '完成训练',
     kSouncEffect: '音效',
+    kDynamicSpeed: '动态速度',
   },
   es: {
     kSets: 'Grupo %{val}',
@@ -54,10 +56,11 @@ const translations = {
     kRedArea: 'Las áreas rojas indican',
     kDirection: ' Dirección de golpes',
     kLetGo: 'Empezar ahora',
-    kBack: 'Regreso',
+    kBack: 'Volver a la página de inicio',
     kCurrentSets: '%{number} grupo',
     kFinish: 'Completa tu entrenamiento',
     kSouncEffect: 'Efecto de sonido',
+    kDynamicSpeed: 'Velocidad dinámica',
   },
   ko: {
     kSets: '% {val}',
@@ -73,10 +76,11 @@ const translations = {
     kRedArea: '빨간 부분은',
     kDirection: '타격 방향',
     kLetGo: '시작합시다',
-    kBack: '돌아가',
+    kBack: '홈으로 돌아가기',
     kCurrentSets: '%{number} 그룹',
     kFinish: '훈련을 완수하다',
     kSouncEffect: '소리 효과',
+    kDynamicSpeed: '동적 속도',
   },
   ja: {
     kSets: '%{val}組',
@@ -92,10 +96,11 @@ const translations = {
     kRedArea: '赤い部分は',
     kDirection: '方向を打つ',
     kLetGo: '始めましょう',
-    kBack: '戻る',
+    kBack: 'ホームに戻る',
     kCurrentSets: '%{number}のグループ',
     kFinish: '訓練を終える',
     kSouncEffect: '音声効果',
+    kDynamicSpeed: '動的速度',
   },
   'zh-Hant': {
     kSets: '%{val}組',
@@ -111,10 +116,11 @@ const translations = {
     kRedArea: '紅色區域表示',
     kDirection: '擊打方向',
     kLetGo: '開始吧',
-    kBack: '返回',
+    kBack: '返回首頁',
     kCurrentSets: '第%{number}組',
     kFinish: '完成訓練',
     kSouncEffect: '音效',
+    kDynamicSpeed: '動態速度',
   }
 }
 

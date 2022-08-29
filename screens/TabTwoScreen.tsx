@@ -1,20 +1,20 @@
-import React, { useEffect, useState } from "react"
-import { Button, SafeAreaView, StyleSheet } from "react-native"
-import { useKeepAwake } from "expo-keep-awake"
-import { Audio } from "expo-av"
+import React, { useEffect, useState } from 'react'
+import { Button, SafeAreaView, StyleSheet } from 'react-native'
+import { useKeepAwake } from 'expo-keep-awake'
+import { Audio } from 'expo-av'
 
-import CourtCountdown from "../components/CourtCountdown"
-import CourtFinish from "../components/CourtFinish"
-import CourtOptions from "../components/CourtOptions"
-import CourtPoints, { pointPoisitions } from "../components/CourtPoints"
-import CourtTip from "../components/CourtTip"
+import CourtCountdown from '../components/CourtCountdown'
+import CourtFinish from '../components/CourtFinish'
+import CourtOptions from '../components/CourtOptions'
+import CourtPoints, { pointPoisitions } from '../components/CourtPoints'
+import CourtTip from '../components/CourtTip'
 
-import EditScreenInfo from "../components/EditScreenInfo"
-import { Text, View } from "../components/Themed"
-import Colors from "../constants/Colors"
-import { useAppSelector } from "../hooks/reduxHooks"
-import i18n from "../services/i18n"
-import { RootTabScreenProps } from "../types"
+import EditScreenInfo from '../components/EditScreenInfo'
+import { Text, View } from '../components/Themed'
+import Colors from '../constants/Colors'
+import { useAppSelector } from '../hooks/reduxHooks'
+import i18n from '../services/i18n'
+import { RootTabScreenProps } from '../types'
 import {
   selectPoints,
   selectRest,
@@ -22,24 +22,23 @@ import {
   selectShots,
   selectSoundEffect,
   selectSpeed,
-} from "./configSlice"
-import store from "../store"
+} from './configSlice'
+import store from '../store'
 
 let positionInterval: any = null
 
 export default function TabTwoScreen({
   navigation,
-}: RootTabScreenProps<"TabOne">) {
+}: RootTabScreenProps<'TabOne'>) {
   useKeepAwake()
   const sets = useAppSelector(selectSets)
   const rest = useAppSelector(selectRest)
   const shots = useAppSelector(selectShots)
   const speed = useAppSelector(selectSpeed)
   const pointPositions = useAppSelector(selectPoints)
-  // const soundEffect = useAppSelector(selectSoundEffect)
 
   const [activePoint, setActivePoint] = useState({
-    position: "",
+    position: '',
     directionDegree: 0,
   })
   const [tipVisible, setTipVisible] = useState(true)
@@ -59,7 +58,7 @@ export default function TabTwoScreen({
 
     // console.log("Loading Sound")
     const { sound } = await Audio.Sound.createAsync(
-      require("../assets/audio/2.mp3")
+      require('../assets/audio/2.mp3')
     )
     setSound(sound)
 
@@ -79,21 +78,34 @@ export default function TabTwoScreen({
   const startPlay = () => {
     setCurrentShot(shots)
     const setRandomPosition = () => {
-      playSound()
       const position =
         pointPositions[Math.round(Math.random() * (pointPositions.length - 1))]
 
       const randomnum = Math.round(Math.random() * 3)
       const degree = 90 * randomnum
 
+      playSound()
       setActivePoint({
         position,
         directionDegree: degree,
       })
     }
     const tick = () => {
-      setRandomPosition()
-      setCurrentShot((shot) => Math.max(shot - 1, 0))
+      const dynamicSpeed = store.getState().config.dynamicSpeed
+      const doAction = () => {
+        // log time
+        const date = new Date()
+        console.log(`${date.getMinutes()}:${date.getSeconds()} ${date.getMilliseconds()}`)
+        setRandomPosition()
+        setCurrentShot((shot) => Math.max(shot - 1, 0))
+      }
+      if (dynamicSpeed) {
+        setTimeout(() => {
+          doAction()
+        }, Math.random() * (speed / 2.3) * 1000)
+      } else {
+        doAction()
+      }
     }
 
     positionInterval = setInterval(() => {
@@ -103,7 +115,7 @@ export default function TabTwoScreen({
 
   const clearPosition = () => {
     setActivePoint({
-      position: "",
+      position: '',
       directionDegree: 0,
     })
   }
@@ -129,7 +141,7 @@ export default function TabTwoScreen({
   }, [currentShot])
 
   useEffect(() => {
-    return () => positionInterval && clearInterval(positionInterval)
+    return () => clearInterval(positionInterval)
   }, [])
 
   const handleStartClick = () => {
@@ -137,7 +149,7 @@ export default function TabTwoScreen({
     setCountdownNum(5)
   }
 
-  const phaseString = i18n.t("kCurrentSets", { number: sets - leftSets + 1 })
+  const phaseString = i18n.t('kCurrentSets', { number: sets - leftSets + 1 })
   const hadnleMainTouch = () => {
     setOptionsVisible((visible) => !visible)
   }
@@ -147,7 +159,7 @@ export default function TabTwoScreen({
       {layerVisible && (
         <View style={styles.layer}>
           <Button
-            color={"#000"}
+            color={'#000'}
             title="hide"
             onPress={() => setLayerVisible(false)}
           ></Button>
@@ -178,7 +190,7 @@ export default function TabTwoScreen({
           <Button
             title="back"
             onPress={() => {
-              navigation.navigate("Root")
+              navigation.navigate('Root')
             }}
           ></Button>
           <Button title="layer" onPress={() => setLayerVisible(true)}></Button>
@@ -202,50 +214,50 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.light.court,
   },
   main: {
-    height: "100%",
-    position: "relative",
-    backgroundColor: "transparent",
+    height: '100%',
+    position: 'relative',
+    backgroundColor: 'transparent',
   },
   debug: {
-    position: "absolute",
+    position: 'absolute',
     zIndex: 110,
-    backgroundColor: "transparent",
-    display: "none",
+    backgroundColor: 'transparent',
+    display: 'none',
   },
   shortServiceLine: {
-    marginTop: "30%",
+    marginTop: '30%',
     height: 10,
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
   },
   court: {
     flex: 1,
-    alignItems: "center",
-    backgroundColor: "transparent",
+    alignItems: 'center',
+    backgroundColor: 'transparent',
   },
   centerLine: {
-    height: "100%",
+    height: '100%',
     width: 10,
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
   },
   title: {
     fontSize: 20,
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
   separator: {
     marginVertical: 30,
     height: 1,
-    width: "80%",
+    width: '80%',
   },
   layer: {
-    position: "absolute",
+    position: 'absolute',
     top: 0,
     left: 0,
     right: 0,
     bottom: 0,
-    backgroundColor: "#222",
+    backgroundColor: '#222',
     zIndex: 120,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 })

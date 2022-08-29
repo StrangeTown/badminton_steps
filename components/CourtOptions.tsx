@@ -2,7 +2,7 @@ import { StyleSheet, Switch, View, Text, Pressable } from 'react-native'
 import i18n from '../services/i18n/index'
 import { useNavigation } from '@react-navigation/native'
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks'
-import { selectSoundEffect, updateSoundEffect } from '../screens/configSlice'
+import { selectDynamicSpeed, selectSoundEffect, updateDynamicSpeed, updateSoundEffect } from '../screens/configSlice'
 import Colors from '../constants/Colors'
 import persist from '../utils/persist'
 
@@ -33,15 +33,28 @@ const OptionItem = ({ title, value, onValueChange }: OptionItemProps) => {
 export default function CourtOptions() {
   const navigation = useNavigation()
   const soundEffect = useAppSelector(selectSoundEffect)
+  const dynamicSpeed = useAppSelector(selectDynamicSpeed)
   const dispatch = useAppDispatch()
 
   return (
     <View style={styles.container}>
+
+      {/* Sound Effect */}
       <OptionItem 
         title={i18n.t('kSouncEffect')}
         value={soundEffect}
         onValueChange={(value) => {
           dispatch(updateSoundEffect(value))
+          persist.saveState()
+        }}
+      />
+
+      {/* Dynamic Speed */}
+      <OptionItem 
+        title={i18n.t('kDynamicSpeed')}
+        value={dynamicSpeed}
+        onValueChange={(value) => {
+          dispatch(updateDynamicSpeed(value))
           persist.saveState()
         }}
       />
@@ -53,7 +66,7 @@ export default function CourtOptions() {
             navigation.goBack()
           }}
         >
-          <Text>{i18n.t('kBack')}</Text>
+          <Text style={styles.goBackButtonText}>{i18n.t('kBack')}</Text>
         </Pressable>
       </View>
     </View>
@@ -66,12 +79,12 @@ const styles = StyleSheet.create({
     left: 0,
     top: 0,
     right: 0,
-    height: 200,
+    height: 220,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-end',
     zIndex: 10,
-    backgroundColor: 'rgba(0, 0, 0, 0.3)',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   divider: {
     width: '100%',
@@ -117,5 +130,10 @@ const styles = StyleSheet.create({
       height: 14,
     },
     shadowRadius: 14,
+  },
+  goBackButtonText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: Colors.light.font,
   },
 })

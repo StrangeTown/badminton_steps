@@ -1,4 +1,4 @@
-import { updatePoints, updateRest, updateSets, updateShots, updateSoundEffect, updateSpeed } from "../screens/configSlice"
+import { updateDynamicSpeed, updatePoints, updateRest, updateSets, updateShots, updateSoundEffect, updateSpeed } from "../screens/configSlice"
 import persist from "../utils/persist"
 import get from 'lodash.get'
 import store from "../store"
@@ -12,6 +12,7 @@ const initConfigFromStorage = async () => {
   const speed = get(storedState, 'config.speed') || Config.speed
   const points = get(storedState, 'config.points') || Config.points
   const soundEffect = get(storedState, 'config.soundEffect') || Config.soundEffect
+  const dynamicSpeed = get(storedState, 'config.dynamicSpeed') || Config.dynamicSpeed
 
   store.dispatch(updateSets(sets))
   store.dispatch(updateRest(rest))
@@ -19,6 +20,7 @@ const initConfigFromStorage = async () => {
   store.dispatch(updateSpeed(speed))
   store.dispatch(updatePoints(points))
   store.dispatch(updateSoundEffect(soundEffect))
+  store.dispatch(updateDynamicSpeed(dynamicSpeed))
 }
 
 export default {
