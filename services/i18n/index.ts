@@ -63,7 +63,7 @@ const translations = {
     kDynamicSpeed: 'Velocidad dinámica',
   },
   ko: {
-    kSets: '% {val}',
+    kSets: '%{val}',
     kShots: '%{val} 타격',
     kGotoPlay: '준비가다 되었다',
     kConfig: '설정',
