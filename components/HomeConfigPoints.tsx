@@ -14,6 +14,7 @@ const Row = ({ rowidx, clickable }: RowProps) => {
 
   const handlePointClick = (position: string) => {
     if (points.includes(position)) {
+      if (points.length === 1) return
       dispatch(updatePoints(points.filter((p) => p !== position)))
     } else {
       dispatch(updatePoints([...points, position]))
