@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from "react-native"
 import Colors from "../constants/Colors"
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks"
 import { selectPoints, updatePoints } from "../screens/configSlice"
+import { appDimensions } from "../utils"
 
 type RowProps = {
   rowidx: number
@@ -11,6 +12,8 @@ type RowProps = {
 const Row = ({ rowidx, clickable }: RowProps) => {
   const points = useAppSelector(selectPoints)
   const dispatch = useAppDispatch()
+  const isSmall = appDimensions.isSmallDevice()
+  const isSmallClickable = isSmall && clickable
 
   const handlePointClick = (position: string) => {
     if (points.includes(position)) {
@@ -37,6 +40,7 @@ const Row = ({ rowidx, clickable }: RowProps) => {
               styles.point,
               isActive && styles.pointActive,
               clickable && styles.pointClickable,
+              isSmallClickable && styles.pointClickableSmall,
             ]}
             key={idx}
             onTouchEnd={() => {
@@ -66,10 +70,16 @@ interface ContainerProps {
 
 export default function HomeConfigPoints({ type }: ContainerProps) {
   const navigation = useNavigation()
+  const isModal = type === "modal"
+  const isSmallModal = isModal && appDimensions.isSmallDevice()
 
   return (
     <View
-      style={[styles.container, type === "modal" && styles.containerModal]}
+      style={[
+        styles.container,
+        type === "modal" && styles.containerModal,
+        isSmallModal && styles.containerModalSmall,
+      ]}
       onTouchEnd={() => {
         navigation.navigate("Modal")
       }}
@@ -100,6 +110,10 @@ const styles = StyleSheet.create({
     width: containerWidth * 1.3,
     height: containerHeight * 1.3,
   },
+  containerModalSmall: {
+    width: containerWidth * 1.2,
+    height: containerHeight * 0.94,
+  },
   row: {
     display: "flex",
     flexDirection: "row",
@@ -112,12 +126,20 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     backgroundColor: "rgba(255,255,255,0.2)",
   },
+  pointSmall: {
+    width: pointSize * 0.8,
+    height: pointSize * 0.8,
+  },
   pointActive: {
     backgroundColor: "#fff",
   },
   pointClickable: {
     width: pointSize * 1.4,
     height: pointSize * 1.4,
+  },
+  pointClickableSmall: {
+    width: pointSize * 1.2,
+    height: pointSize * 1.2,
   },
   linesContainer: {
     position: "absolute",

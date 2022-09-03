@@ -6,6 +6,7 @@ import HomeConfigPoints from '../components/HomeConfigPoints'
 import Colors from '../constants/Colors'
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks'
 import i18n from '../services/i18n'
+import { appDimensions } from '../utils'
 import {
   selectRest,
   selectSets,
@@ -23,12 +24,13 @@ export default function ModalScreen() {
   const shots = useAppSelector(selectShots)
   const speed = useAppSelector(selectSpeed)
   const dispatch = useAppDispatch()
+  const isSmall = appDimensions.isSmallDevice()
 
   return (
     <View style={styles.container}>
       <HomeConfigPoints type='modal'/>
 
-      <View style={styles.sliders}>
+      <View style={[styles.sliders, isSmall && styles.slidersSmall]}>
         <ConfigSlider
           title={i18n.t('kSetsTitle')}
           min={1}
@@ -78,5 +80,8 @@ const styles = StyleSheet.create({
   },
   sliders: {
     marginTop: 20,
+  },
+  slidersSmall: {
+    marginTop: 0,
   }
 })
