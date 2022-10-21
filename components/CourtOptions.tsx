@@ -102,7 +102,6 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 20,
-    fontWeight: 'bold',
     color: '#fff',
     marginBottom: 10,
   },
@@ -133,7 +132,6 @@ const styles = StyleSheet.create({
   },
   goBackButtonText: {
     fontSize: 20,
-    fontWeight: 'bold',
     color: Colors.light.font,
   },
 })
