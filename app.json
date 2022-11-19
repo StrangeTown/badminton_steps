@@ -26,7 +26,12 @@
       }
     },
     "locales": {
-      "en": "./services/i18n/english.json"
+      "en": "./services/i18n/english.json",
+      "zh": "./services/i18n/zh.json",
+      "zh-Hant": "./services/i18n/zh-Hant.json",
+      "es": "./services/i18n/es.json",
+      "ko": "./services/i18n/ko.json",
+      "ja": "./services/i18n/ja.json"
     },
     "android": {
       "adaptiveIcon": {
