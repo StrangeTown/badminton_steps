@@ -214,9 +214,9 @@ export default function TabTwoScreen({
         />
       )}
       {optionsVisible && <CourtOptions />}
-      {/* <View>
+      <View>
         <Text>{activePoint.position}</Text>
-      </View> */}
+      </View>
       <View style={styles.main} onTouchEnd={hadnleMainTouch}>
         {countdownNum > 0 && (
           <CourtCountdown

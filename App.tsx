@@ -24,9 +24,9 @@ export default function App() {
     return (
       <Provider store={store}>
         <SafeAreaProvider>
-        <Navigation colorScheme={colorScheme} />
-        <StatusBar />
-      </SafeAreaProvider>
+          <Navigation colorScheme={colorScheme} />
+          <StatusBar />
+        </SafeAreaProvider>
       </Provider>
     );
   }
