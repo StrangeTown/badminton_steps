@@ -6,6 +6,7 @@ import { RootTabScreenProps } from '../types'
 import Colors from '../constants/Colors'
 import AppButton from '../components/base/AppButton'
 import i18n from '../services/i18n'
+import HomeList from '../components/HomeList'
 
 export default function TabOneScreen({
   navigation,
@@ -17,6 +18,7 @@ export default function TabOneScreen({
 
   return (
     <View style={styles.container}>
+      <HomeList />
       <HomeConfig />
 
       <View style={styles.startWrap}>
