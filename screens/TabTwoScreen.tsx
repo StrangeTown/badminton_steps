@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Button, SafeAreaView, StyleSheet } from 'react-native'
 import { useKeepAwake } from 'expo-keep-awake'
 import { Audio } from 'expo-av'
@@ -24,13 +24,15 @@ import {
   selectSpeed,
 } from './configSlice'
 import store from '../store'
-
-let positionInterval: any = null
+import { useIsFirstRender } from '../hooks/useIsFirstRender'
 
 export default function TabTwoScreen({
   navigation,
 }: RootTabScreenProps<'TabOne'>) {
   useKeepAwake()
+  const [timerId, setTimerId] = useState<any>()
+  const isFirstRender = useIsFirstRender()
+
   const sets = useAppSelector(selectSets)
   const rest = useAppSelector(selectRest)
   const shots = useAppSelector(selectShots)
@@ -117,41 +119,70 @@ export default function TabTwoScreen({
       : undefined
   }, [directionSound])
 
+  const setRandomPosition = () => {
+    const position =
+      pointPositions[Math.round(Math.random() * (pointPositions.length - 1))]
+
+    const randomnum = Math.round(Math.random() * 3)
+    const degree = 90 * randomnum
+
+    playSound()
+    playDirectionSound(position)
+    setActivePoint({
+      position,
+      directionDegree: degree,
+    })
+  }
+  const tick = () => {
+    const dynamicSpeed = store.getState().config.dynamicSpeed
+    if (dynamicSpeed) {
+      setTimeout(() => {
+        setRandomPosition()
+      }, Math.random() * (speed / 2.3) * 1000)
+    } else {
+      setRandomPosition()
+    }
+  }
+
   const startPlay = () => {
     setCurrentShot(shots)
-    const setRandomPosition = () => {
-      const position =
-        pointPositions[Math.round(Math.random() * (pointPositions.length - 1))]
-
-      const randomnum = Math.round(Math.random() * 3)
-      const degree = 90 * randomnum
-
-      playSound()
-      playDirectionSound(position)
-      setActivePoint({
-        position,
-        directionDegree: degree,
-      })
+    if (timerId) {
+      clearInterval(timerId)
     }
-    const tick = () => {
-      const dynamicSpeed = store.getState().config.dynamicSpeed
-      const doAction = () => {
-        setRandomPosition()
-        setCurrentShot((shot) => Math.max(shot - 1, 0))
-      }
-      if (dynamicSpeed) {
-        setTimeout(() => {
-          doAction()
-        }, Math.random() * (speed / 2.3) * 1000)
-      } else {
-        doAction()
-      }
-    }
-
-    positionInterval = setInterval(() => {
-      tick()
-    }, speed * 1000)
+    const ms = speed * 1000
+    const timer = setInterval(() => {
+      setCurrentShot((shot) => shot - 1)
+    }, ms)
+    setTimerId(timer)
   }
+
+  useEffect(() => {
+    if (isFirstRender) return
+
+    // Tick when currentShot changes
+    if (currentShot !== shots) {
+      tick()
+    }
+
+    if (currentShot === 0) {
+      timerId && clearInterval(timerId)
+      setTimeout(() => {
+        setLeftSets((sets) => sets - 1)
+      }, 2400)
+    }
+  }, [currentShot])
+
+  useEffect(() => {
+    if (isFirstRender) return
+
+    if (leftSets === 0) {
+      clearPosition()
+      setFinishedModalVisible(true)
+      return
+    }
+
+    startRest()
+  }, [leftSets])
 
   const clearPosition = () => {
     setActivePoint({
@@ -165,23 +196,9 @@ export default function TabTwoScreen({
   }
 
   useEffect(() => {
-    if (currentShot === 0) {
-      clearInterval(positionInterval)
-      setTimeout(() => {
-        const sets = Math.max(leftSets - 1, 0)
-        setLeftSets(sets)
-        if (sets === 0) {
-          clearPosition()
-          setFinishedModalVisible(true)
-        } else {
-          startRest()
-        }
-      }, 3000)
+    return () => {
+      timerId && clearInterval(timerId)
     }
-  }, [currentShot])
-
-  useEffect(() => {
-    return () => clearInterval(positionInterval)
   }, [])
 
   const handleStartClick = () => {
@@ -265,7 +282,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     zIndex: 110,
     backgroundColor: 'transparent',
-    display: 'none',
+    // display: 'none',
   },
   shortServiceLine: {
     marginTop: '30%',

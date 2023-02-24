@@ -8,48 +8,36 @@ interface Props {
   phase: string
 }
 
-let countdownInterval: number | undefined = undefined
-
 export default function ({ initialNum, onFinish, phase }: Props) {
   const [countdownNum, setCountdownNum] = useState(initialNum)
 
-  const tick = () => {
-    setCountdownNum((num) => {
-      return Math.max(num - 1, 1)
-    })
-  }
-
   useEffect(() => {
-    if (countdownNum === 1) {
-      clearInterval(countdownInterval)
-      setTimeout(() => {
-        onFinish()
-      }, 1000)
+    if (countdownNum === 0) {
+      onFinish()
+      return
     }
+    const timeout = setTimeout(() => {
+      setCountdownNum((n) => n - 1)
+    }, 1000)
+    return () => clearTimeout(timeout)
   }, [countdownNum])
 
-  useEffect(() => {
-    countdownInterval = window.setInterval(() => {
-      tick()
-    }, 1200)
+  // Support iPad
+  const isIpad = Platform.OS === "ios" && Platform.isPad
+  let countValStyle = isIpad ? {
+    ...styles.countVal,
+    ...styles.countValPad,
+  } : styles.countVal
 
-    return () => {
-      if (countdownInterval) clearTimeout(countdownInterval)
-    }
-  }, [])
-
-  let countValStyle = styles.countVal
-  // support ipad
-  if (Platform.OS === 'ios' && Platform.isPad) {
-    countValStyle = {...countValStyle, ...styles.countValPad}
-  }
+  // Make sure the number is not 0
+  const displayNum = Math.max(countdownNum, 1)
 
   return (
     <View style={styles.countdown}>
       <View style={styles.phaseWapper}>
         <Text style={styles.phase}>{phase}</Text>
       </View>
-      <Text style={countValStyle}>{countdownNum}</Text>
+      <Text style={countValStyle}>{displayNum}</Text>
     </View>
   )
 }
@@ -75,12 +63,12 @@ const styles = StyleSheet.create({
   },
   phase: {
     fontSize: 24,
-    color: Colors.light.font
+    color: Colors.light.font,
   },
   phaseWapper: {
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     padding: 10,
     paddingRight: 30,
     paddingLeft: 30,
-  }
+  },
 })
