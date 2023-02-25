@@ -18,9 +18,10 @@ export default function TabOneScreen({
 
   return (
     <View style={styles.container}>
-      <HomeList />
+      {/* Config */}
       <HomeConfig />
 
+      {/* Start Button */}
       <View style={styles.startWrap}>
         <AppButton
           onPress={() => {
@@ -29,6 +30,9 @@ export default function TabOneScreen({
           title={i18n.t('kGotoPlay')}
         />
       </View>
+
+      {/* Shortcut List */}
+      <HomeList />
     </View>
   )
 }
@@ -50,6 +54,6 @@ const styles = StyleSheet.create({
     width: '80%',
   },
   startWrap: {
-    marginTop: 140,
+    marginTop: 40,
   },
 })

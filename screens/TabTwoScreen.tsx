@@ -19,25 +19,40 @@ import {
   selectPoints,
   selectRest,
   selectSets,
+  selectShortcut,
   selectShots,
   selectSoundEffect,
   selectSpeed,
 } from './configSlice'
 import store from '../store'
 import { useIsFirstRender } from '../hooks/useIsFirstRender'
+import get from 'lodash.get'
 
 export default function TabTwoScreen({
-  navigation,
+  navigation,route
 }: RootTabScreenProps<'TabOne'>) {
+  const shortcutid = get(route,'params.shortcutid','')
+  const shortcut = useAppSelector(state => selectShortcut(state,shortcutid))
+
   useKeepAwake()
   const [timerId, setTimerId] = useState<any>()
   const isFirstRender = useIsFirstRender()
 
-  const sets = useAppSelector(selectSets)
-  const rest = useAppSelector(selectRest)
-  const shots = useAppSelector(selectShots)
-  const speed = useAppSelector(selectSpeed)
-  const pointPositions = useAppSelector(selectPoints)
+  // get config from store
+  let sets = useAppSelector(selectSets)
+  let rest = useAppSelector(selectRest)
+  let shots = useAppSelector(selectShots)
+  let speed = useAppSelector(selectSpeed)
+  let pointPositions = useAppSelector(selectPoints)
+
+  // if navigation from shortcut, use shortcut config
+  if (get(shortcut, 'id')) {
+    sets = get(shortcut, 'sets', sets)
+    rest = get(shortcut, 'rest', rest)
+    shots = get(shortcut, 'shots', shots)
+    speed = get(shortcut, 'speed', speed)
+    pointPositions = get(shortcut, 'points', pointPositions)
+  }
 
   const [activePoint, setActivePoint] = useState({
     position: '',
@@ -282,7 +297,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     zIndex: 110,
     backgroundColor: 'transparent',
-    // display: 'none',
+    display: 'none',
   },
   shortServiceLine: {
     marginTop: '30%',

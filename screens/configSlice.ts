@@ -1,6 +1,16 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import Config from '../constants/Config'
-import { RootState } from '../store'
+import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import Config from "../constants/Config"
+import { RootState } from "../store"
+interface Shortcut {
+  id: string
+  name: string
+  sets: number
+  rest: number
+  shots: number
+  speed: number
+  points: string[]
+}
+type Shortcuts = Shortcut[]
 
 interface ConfigState {
   sets: number
@@ -8,8 +18,9 @@ interface ConfigState {
   shots: number
   speed: number
   points: string[]
-  soundEffect: boolean,
-  dynamicSpeed: boolean,
+  soundEffect: boolean
+  dynamicSpeed: boolean
+  shortcuts: Shortcuts
 }
 
 const initialState: ConfigState = {
@@ -20,10 +31,11 @@ const initialState: ConfigState = {
   points: Config.points,
   soundEffect: Config.soundEffect,
   dynamicSpeed: Config.dynamicSpeed,
+  shortcuts: [],
 }
 
 export const configSlice = createSlice({
-  name: 'config',
+  name: "config",
   initialState,
   reducers: {
     updateSets: (state, action: PayloadAction<number>) => {
@@ -46,7 +58,15 @@ export const configSlice = createSlice({
     },
     updateDynamicSpeed: (state, action: PayloadAction<boolean>) => {
       state.dynamicSpeed = action.payload
-    }
+    },
+    addShortcut: (state, action: PayloadAction<Shortcut>) => {
+      state.shortcuts.push(action.payload)
+    },
+    removeShortcut: (state, action: PayloadAction<string>) => {
+      state.shortcuts = state.shortcuts.filter(
+        (shortcut) => shortcut.id !== action.payload
+      )
+    },
   },
 })
 
@@ -58,6 +78,8 @@ export const {
   updatePoints,
   updateSoundEffect,
   updateDynamicSpeed,
+  addShortcut,
+  removeShortcut,
 } = configSlice.actions
 export const selectSets = (state: RootState) => state.config.sets
 export const selectRest = (state: RootState) => state.config.rest
@@ -65,5 +87,10 @@ export const selectShots = (state: RootState) => state.config.shots
 export const selectSpeed = (state: RootState) => state.config.speed
 export const selectPoints = (state: RootState) => state.config.points
 export const selectSoundEffect = (state: RootState) => state.config.soundEffect
-export const selectDynamicSpeed = (state: RootState) => state.config.dynamicSpeed
+export const selectDynamicSpeed = (state: RootState) =>
+  state.config.dynamicSpeed
+export const selectShortcuts = (state: RootState) => state.config.shortcuts
+export const selectShortcut = (state: RootState, id: string) =>
+  state.config.shortcuts.find((shortcut) => shortcut.id === id)
+
 export default configSlice.reducer
