@@ -67,6 +67,9 @@ export const configSlice = createSlice({
         (shortcut) => shortcut.id !== action.payload
       )
     },
+    setShortcuts: (state, action: PayloadAction<Shortcuts>) => {
+      state.shortcuts = action.payload
+    }
   },
 })
 
@@ -80,6 +83,7 @@ export const {
   updateDynamicSpeed,
   addShortcut,
   removeShortcut,
+  setShortcuts,
 } = configSlice.actions
 export const selectSets = (state: RootState) => state.config.sets
 export const selectRest = (state: RootState) => state.config.rest

@@ -4,6 +4,7 @@ import { Button, Pressable, StyleSheet, Text, View } from "react-native"
 import { useDispatch, useSelector } from "react-redux"
 import { removeShortcut, selectShortcuts } from "../screens/configSlice"
 import i18n from "../services/i18n"
+import persist from "../utils/persist"
 
 export default function HomeList() {
   const shortcuts = useSelector(selectShortcuts)

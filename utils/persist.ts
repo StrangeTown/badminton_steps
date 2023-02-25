@@ -1,9 +1,9 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import store from '../store'
+import store, { RootState } from '../store'
 
 const storageKeyState = "@BadmintonStepsStore:state"
-const saveState = async () => {
-  const state = store.getState()
+
+const saveState = async (state: RootState) => {
   const stateStr = JSON.stringify(state)
   await AsyncStorage.setItem(storageKeyState, stateStr);
 }

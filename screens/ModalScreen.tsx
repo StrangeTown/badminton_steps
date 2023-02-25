@@ -18,6 +18,7 @@ import Colors from "../constants/Colors"
 import { useAppDispatch, useAppSelector } from "../hooks/reduxHooks"
 import i18n from "../services/i18n"
 import { appDimensions } from "../utils"
+import persist from "../utils/persist"
 import {
   addShortcut,
   selectPoints,

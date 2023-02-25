@@ -45,7 +45,6 @@ export default function CourtOptions() {
         value={soundEffect}
         onValueChange={(value) => {
           dispatch(updateSoundEffect(value))
-          persist.saveState()
         }}
       />
 
@@ -55,7 +54,6 @@ export default function CourtOptions() {
         value={dynamicSpeed}
         onValueChange={(value) => {
           dispatch(updateDynamicSpeed(value))
-          persist.saveState()
         }}
       />
       <Divider />
