@@ -3,6 +3,7 @@ import { useNavigation } from "@react-navigation/native"
 import { Button, Pressable, StyleSheet, Text, View } from "react-native"
 import { useDispatch, useSelector } from "react-redux"
 import { removeShortcut, selectShortcuts } from "../screens/configSlice"
+import i18n from "../services/i18n"
 
 export default function HomeList() {
   const shortcuts = useSelector(selectShortcuts)
@@ -25,7 +26,7 @@ export default function HomeList() {
     <View style={styles.container}>
       {/* or */}
       <View style={styles.separator}>
-        <Text style={styles.orText}>Shortcuts</Text>
+        <Text style={styles.orText}>{i18n.t("kShortcuts")}</Text>
         <View style={styles.separatorLine} />
       </View>
 

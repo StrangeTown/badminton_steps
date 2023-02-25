@@ -56,7 +56,7 @@ function Dialog(props: DialogProps) {
         />
         <View style={styles.dialogButtons}>
           <AppButton
-            title="Save"
+            title={i18n.t("kSave")}
             onPress={() => {
               if (value) {
                 props.onSave(value)
@@ -65,7 +65,7 @@ function Dialog(props: DialogProps) {
             type="text"
           />
           <AppButton
-            title="Cancel"
+            title={i18n.t("kCancel")}
             onPress={() => {
               props.onCancel()
             }}
@@ -162,7 +162,9 @@ export default function ModalScreen() {
             navigation.goBack()
           }}
         >
-          <Text style={styles.confirmText}>Confirm</Text>
+          <Text style={styles.confirmText}>
+            {i18n.t("kConfirm")}
+          </Text>
         </Pressable>
         <Pressable
           style={styles.addButton}
@@ -171,22 +173,22 @@ export default function ModalScreen() {
           }}
         >
           <Text style={styles.addText}>
-            Save as Shortcut(Up to 3)
+            {i18n.t("kSaveAsShortcut")}
           </Text>
         </Pressable>
       </View>
 
       {dialogVisible && (
         <Dialog
-          title="Save as Shortcut"
-          text="This will save your current settings as a shortcut. You can access it from the home screen."
+          title={i18n.t("kSaveAsShortcutTitle")}
+          text={i18n.t("kSaveConfigToShortcut")}
           onSave={(value) => {
             handleShorcutSave(value)
           }}
           onCancel={() => {
             setDialogVisible(false)
           }}
-          placeholder="Input shortcut name here"
+          placeholder={i18n.t("kInputShortcutName")}
         />
       )}
     </View>
@@ -196,7 +198,7 @@ export default function ModalScreen() {
 const styles = StyleSheet.create({
   confirmButton: {
     backgroundColor: '#6b5a5a',
-    paddingHorizontal: 50,
+    paddingHorizontal: 60,
     paddingVertical: 10,
     borderRadius: 5,
     alignItems: "center",
@@ -241,11 +243,12 @@ const styles = StyleSheet.create({
   dialogTitle: {
     fontSize: 18,
     fontWeight: "bold",
+    color: "#555",
   },
   dialogText: {
-    fontSize: 14,
-    color: "#9b8a8a",
     marginTop: 10,
+    fontSize: 12,
+    color: "#9b8a8a",
     width: "100%",
   },
   actions: {
@@ -255,7 +258,7 @@ const styles = StyleSheet.create({
     display: "flex",
   },
   addButton: {
-    marginTop: 10,
+    marginTop: 6,
     padding: 10,
     borderRadius: 5,
     // backgroundColor: "#ddd",

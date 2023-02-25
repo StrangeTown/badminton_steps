@@ -13,7 +13,10 @@ export default function TabOneScreen({
 }: RootTabScreenProps<'TabOne'>) {
   const gotoPlay = () => {
     persist.saveState()
-    navigation.navigate('Practice')
+    navigation.navigate({
+      name: 'Practice',
+      params: {},
+    })
   }
 
   return (
