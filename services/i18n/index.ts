@@ -176,7 +176,7 @@ const translations = {
     kCancel: "取消",
     kShortcuts: "快捷方式",
   },
-  "da-DK": {
+  dk: {
     kSets: "%{val} sæt",
     kShots: "%{val} Shots",
     kGotoPlay: "Jeg er klar!",
@@ -205,7 +205,7 @@ const translations = {
     kAnnuller: "Annuller",
     kShortcuts: "Genveje",
   },
-  "id-ID": {
+  id: {
     kSet: "%{val} Set",
     kShots: "%{val} Tembakan",
     kGotoPlay: "Saya siap!",
@@ -234,7 +234,7 @@ const translations = {
     kBatal: "Batalkan",
     kPintasan: "Pintasan",
   },
-  "ms-MY": {
+  my: {
     kSets: "%{val} Sets",
     kShots: "%{val} Shots",
     kGotoPlay: "Saya bersedia!",
@@ -263,7 +263,7 @@ const translations = {
     kBatal: "Batal",
     kPintasan: "Pintasan",
   },
-  "th-TH": {
+  th: {
     kSets: "%{val} ชุด",
     kShots: "%{val} ช็อต",
     kGotoPlay: "ฉันพร้อมแล้ว!",
@@ -292,7 +292,7 @@ const translations = {
     kCancel: "ยกเลิก",
     kShortcuts: "ทางลัด",
   },
-  "hi-IN": {
+  in: {
     kSets: "%{val} सेट",
     केशॉट्स: "%{वैल} शॉट्स",
     kGotoPlay: "मैं तैयार हूँ!",
@@ -321,7 +321,7 @@ const translations = {
     "के-रद्द करें": "रद्द करें",
     केशॉर्टकट: "शॉर्टकट",
   },
-  "de-DE": {
+  de: {
     kSets: "%{val} Sets",
     kShots: "%{val} Schüsse",
     kGotoPlay: "Ich bin bereit!",
@@ -350,7 +350,7 @@ const translations = {
     kAbbrechen: "Abbrechen",
     kKurzbefehle: "Kurzbefehle",
   },
-  "nl-NL": {
+  nl: {
     kSets: "%{val} sets",
     kShots: "%{val} Shots",
     kGotoPlay: "Ik ben er klaar voor!",
